@@ -1,0 +1,9 @@
+{
+    "id": "proj5",
+    "name": "The Garden",
+    "summary": "An interactive generative art simulation that models plants and bees",
+    "img": "images/The Garden.png",
+    "details": "This was made for fun because I wanted to play around in a sandbox.",
+    "category": "web",
+    "github_link": "https://github.com/HappyCPPD/Garden"
+}

@@ -107,4 +107,36 @@
 
 .project-detail-content {
   line-height: 1.6;
+}
+
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 10px;
+  padding: 8px 15px;
+  background: var(--primary-color);
+  color: var(--text-light);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.github-link i {
+  margin-right: 8px;
+  font-size: 1.1rem;
+}
+
+.github-link:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.light-theme .github-link {
+  background: var(--lt-primary-color);
+}
+
+.light-theme .github-link:hover {
+  background: var(--lt-secondary-color);
 } 

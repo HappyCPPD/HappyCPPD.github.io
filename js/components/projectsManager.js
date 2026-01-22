@@ -74,6 +74,7 @@ function openProjectWindow(project) {
           <div>
             <h2>${project.name}</h2>
             <p class="subtitle">Category: ${project.category}</p>
+            ${project.github_link ? `<a href="${project.github_link}" target="_blank" class="github-link"><i class="fab fa-github"></i> View on GitHub</a>` : ''}
           </div>
         </div>
         <div class="project-detail-content">

@@ -1,0 +1,9 @@
+{
+    "id": "proj6",
+    "name": "Discord Webhook",
+    "summary": "Used to send messages to a discord webhook",
+    "img": "images/Discord Webhook.png",
+    "details": "Was made so I could send alerts/messages to a discord server via a webhook",
+    "category": "web",
+    "github_link": "https://github.com/HappyCPPD/Chatroom-with-encrypter"
+}
