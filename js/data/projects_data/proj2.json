@@ -1,0 +1,8 @@
+{
+    "id": "proj2",
+    "name": "CyberSecurity Automated Recon Tool",
+    "summary": "An automated reconnaissance tool that streamlines security assessments.",
+    "img": "images/Recon Tool.png",
+    "details": "Built with Bash scripting, this tool automates various reconnaissance techniques used in cybersecurity assessments, saving valuable time during security evaluations.",
+    "category": "bash"
+}
