@@ -1,8 +1,6 @@
-// Terminal management system
 import { launchApp } from './windowManager.js';
 import { showNotification } from './notifications.js';
 
-// Game state variables
 let snakeGame = null;
 let guessNumberGame = null;
 let hangmanGame = null;
@@ -20,18 +18,15 @@ function handleTerminal(e) {
     input.value = '';
   }
   
-  // Handle snake game key presses
   if (snakeGame && snakeGame.isRunning) {
     snakeGame.handleKeyPress(e);
   }
 }
 
 function processCommand(command, output) {
-  // Extract command and arguments
   const args = command.split(' ');
   const mainCommand = args[0];
   
-  // Command registry
   const commands = {
     help: () => {
       output.innerHTML += `
@@ -65,8 +60,7 @@ function processCommand(command, output) {
       launchApp('contact');
     },
     clear: () => {
-      output.innerHTML = `Welcome to my Portfolio
-      Type <strong>help</strong> for a list of commands.`;
+      output.innerHTML = `Welcome to my Portfolio\r\n      Type <strong>help</strong> for a list of commands.`;
     },
     ascii: () => {
       if (args.length < 2) {
@@ -92,10 +86,8 @@ function processCommand(command, output) {
         <div id="snake-game" class="terminal-game"></div>
       `;
       
-      // Scroll to the game area
       output.scrollTop = output.scrollHeight;
       
-      // Initialize the game
       snakeGame = initSnakeGame('snake-game');
     },
     guess: () => {
@@ -115,7 +107,6 @@ function processCommand(command, output) {
         <div id="guess-game" class="terminal-game"></div>
       `;
       
-      // Initialize the game state
       guessNumberGame = {
         isRunning: true,
         secretNumber: secretNumber,
@@ -152,7 +143,6 @@ function processCommand(command, output) {
         return;
       }
       
-      // List of words for the game
       const words = [
         'javascript', 'python', 'terminal', 'computer', 'algorithm',
         'portfolio', 'developer', 'programming', 'cybersecurity', 'network'
@@ -230,7 +220,6 @@ function processCommand(command, output) {
 =========`
         ];
         
-        // Display current state
         let displayWord = '';
         for (let char of word) {
           if (guessedLetters.includes(char)) {
@@ -248,17 +237,15 @@ function processCommand(command, output) {
           <div class="terminal-line">Remaining attempts: ${remainingAttempts}</div>
         `;
         
-        // Check win/lose condition
         if (!displayWord.includes('_')) {
           output.innerHTML += `<div class="terminal-line">Congratulations! You guessed the word: ${word}</div>`;
           hangmanGame.isRunning = false;
         } else if (remainingAttempts === 0) {
-          output.innerHTML += `<div class="terminal-line">Game over! The word was: ${word}</div>`;
+          output.innerHTML += `<div class="terminal-line">Game over! The word was: ${word}.</div>`;
           hangmanGame.isRunning = false;
         }
       }
       
-      // Initialize the game state
       hangmanGame = {
         isRunning: true,
         word: word,
@@ -344,7 +331,6 @@ function processCommand(command, output) {
         `
       };
       
-      // Simulated weather based on city name length
       let weather;
       const seed = city.length % 4;
       
@@ -370,7 +356,6 @@ function processCommand(command, output) {
       matrixElement.className = 'terminal-game';
       output.appendChild(matrixElement);
       
-      // Scroll to the effect area
       output.scrollTop = output.scrollHeight;
       
       let matrixInterval;
@@ -378,7 +363,6 @@ function processCommand(command, output) {
       const width = 40;
       const height = 15;
       
-      // Create matrix effect
       const columns = [];
       for (let i = 0; i < width; i++) {
         columns[i] = Math.floor(Math.random() * height);
@@ -405,7 +389,6 @@ function processCommand(command, output) {
         
         matrixElement.innerHTML = matrixHTML;
         
-        // Update column positions
         for (let i = 0; i < width; i++) {
           if (Math.random() > 0.975) {
             columns[i] = 0;
@@ -418,14 +401,12 @@ function processCommand(command, output) {
         }
       }, 100);
       
-      // Automatically stop after 10 seconds
       setTimeout(() => {
         clearInterval(matrixInterval);
         output.innerHTML += `<div class="terminal-line">Matrix effect stopped.</div>`;
       }, 10000);
     },
     default: () => {
-      // Check if we're in a game
       if (guessNumberGame && guessNumberGame.isRunning) {
         guessNumberGame.handleGuess(command);
         return;
@@ -451,10 +432,8 @@ function processCommand(command, output) {
   }, 100);
 }
 
-// ASCII Art generator
 function generateAsciiArt(text) {
   const fontStyles = [
-    // Simple block style
     (char) => {
       switch(char.toLowerCase()) {
         case 'a': return '█▀█\n█▀█\n▀ ▀';
@@ -503,16 +482,13 @@ function generateAsciiArt(text) {
     }
   ];
   
-  // Use the first font style
   const fontStyle = fontStyles[0];
   
-  // Convert text to ASCII art
   const charArts = [];
   for (let i = 0; i < text.length; i++) {
     charArts.push(fontStyle(text[i]));
   }
   
-  // Combine the character arts
   let result = '';
   const lines = charArts[0].split('\n');
   
@@ -527,7 +503,6 @@ function generateAsciiArt(text) {
   return result;
 }
 
-// Snake Game
 function initSnakeGame(containerId) {
   const container = document.getElementById(containerId);
   const width = 20;
@@ -542,14 +517,11 @@ function initSnakeGame(containerId) {
   function drawGame() {
     let gameHTML = '';
     
-    // Create the game board
     gameHTML += '<div class="snake-board">';
     for (let y = 0; y < height; y++) {
       gameHTML += '<div class="snake-row">';
       for (let x = 0; x < width; x++) {
-        // Check if this position is snake
         let isSnake = snake.some(segment => segment.x === x && segment.y === y);
-        // Check if this position is food
         let isFood = food.x === x && food.y === y;
         
         if (isSnake) {
@@ -564,17 +536,14 @@ function initSnakeGame(containerId) {
     }
     gameHTML += '</div>';
     
-    // Display score
     gameHTML += `<div class="snake-score">Score: ${score}</div>`;
     
     container.innerHTML = gameHTML;
   }
   
   function updateGame() {
-    // Update direction
     direction = nextDirection;
     
-    // Calculate new head position
     const head = {...snake[0]};
     switch(direction) {
       case 'up': head.y--; break;
@@ -583,34 +552,26 @@ function initSnakeGame(containerId) {
       case 'right': head.x++; break;
     }
     
-    // Check collision with walls
     if (head.x < 0 || head.x >= width || head.y < 0 || head.y >= height) {
       endGame();
       return;
     }
     
-    // Check collision with self
     if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
       endGame();
       return;
     }
     
-    // Add new head
     snake.unshift(head);
     
-    // Check if food is eaten
     if (head.x === food.x && head.y === food.y) {
-      // Increase score
       score++;
       
-      // Generate new food
       generateFood();
     } else {
-      // Remove tail
       snake.pop();
     }
     
-    // Redraw
     drawGame();
   }
   
@@ -658,14 +619,12 @@ function initSnakeGame(containerId) {
     }
   }
   
-  // Start the game
   startGame();
   
-  // Return the game controller
   return {
     isRunning: true,
     handleKeyPress
   };
 }
 
-export { handleTerminal }; 
+export { handleTerminal };

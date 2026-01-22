@@ -1,20 +1,15 @@
-// Theme manager
 const THEME_KEY = 'portfolio-theme-preference';
 
-// Initialize theme from user preference or localStorage
 function initTheme() {
-  // Check localStorage first
   const savedTheme = localStorage.getItem(THEME_KEY);
   
   if (savedTheme) {
     setTheme(savedTheme);
   } else {
-    // Check user's system preference
     const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     setTheme(prefersDarkMode ? 'dark' : 'light');
   }
   
-  // Create theme toggle button
   createThemeToggle();
 }
 
@@ -32,10 +27,8 @@ function createThemeToggle() {
   
   themeToggle.addEventListener('click', toggleTheme);
   
-  // Insert before the datetime
   taskbar.insertBefore(themeToggle, datetime);
   
-  // Update toggle state
   updateToggleState();
 }
 
@@ -67,4 +60,4 @@ function updateToggleState() {
   toggle.classList.toggle('dark-active', !isLight);
 }
 
-export { initTheme, toggleTheme }; 
+export { initTheme, toggleTheme };

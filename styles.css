@@ -47,7 +47,6 @@
     background: rgba(255, 255, 255, 0.4);
   }
   
-  /* Boot Screen */
   #boot-screen {
     position: absolute;
     width: 100%;
@@ -100,7 +99,6 @@
     to { opacity: 0; visibility: hidden; }
   }
   
-  /* Desktop */
   #desktop {
     height: 100%;
     width: 100%;
@@ -162,7 +160,6 @@
     margin-top: 5px;
   }
   
-  /* Taskbar */
   #taskbar {
     position: absolute;
     bottom: 0;
@@ -376,7 +373,7 @@
   .window-controls button:last-child:hover {
     background: var(--error-color);
   }
-  
+
   .window-sidebar {
     width: 200px;
     background: rgba(0, 0, 0, 0.2);

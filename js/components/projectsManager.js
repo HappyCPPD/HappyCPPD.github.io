@@ -1,8 +1,5 @@
-// Projects management system
-
 import { projects, loadProjects } from '../data/projects.js';
 
-// Load projects when the module initializes
 import { focusWindow } from './windowManager.js';
 
 function setupProjectFilters() {
@@ -82,12 +79,12 @@ function openProjectWindow(project) {
   
   document.body.appendChild(win);
   
-  // Position the window and add it to the taskbar
+  
   win.style.left = `${window.innerWidth / 2 - 350}px`;
   win.style.top = `${window.innerHeight / 2 - 250}px`;
   win.style.display = 'block';
   
-  // Create taskbar button
+  
   const taskBtn = document.createElement('button');
   taskBtn.id = `task-win-proj-${project.id}`;
   taskBtn.className = 'task-btn active';
@@ -98,4 +95,4 @@ function openProjectWindow(project) {
   focusWindow(win);
 }
 
-export { setupProjectFilters, populateProjects, openProjectWindow }; 
+export { setupProjectFilters, populateProjects, openProjectWindow };

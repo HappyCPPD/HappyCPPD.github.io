@@ -1,4 +1,3 @@
-/* Terminal */
 .terminal {
   font-family: 'Consolas', 'Monaco', monospace;
   background: var(--bg-darker);
@@ -41,4 +40,4 @@
 
 .terminal-line {
   margin-bottom: 5px;
-} 
+}

@@ -1,4 +1,3 @@
-// Window management system
 let dragOffsetX, dragOffsetY, activeWindow;
 
 function startDrag(e, el) {
@@ -19,14 +18,12 @@ function dragWindow(e) {
   let newX = e.clientX - dragOffsetX;
   let newY = e.clientY - dragOffsetY;
   
-  // Prevent dragging outside the viewport
   newX = Math.max(0, Math.min(window.innerWidth - activeWindow.offsetWidth, newX));
   newY = Math.max(0, Math.min(window.innerHeight - activeWindow.offsetHeight, newY));
   
   activeWindow.style.left = `${newX}px`;
   activeWindow.style.top = `${newY}px`;
   
-  // Show snap areas when dragging near edges
   handleSnapZones(e, newX, newY);
 }
 
@@ -37,38 +34,30 @@ function stopDrag() {
   activeWindow = null;
 }
 
-// Window snapping functionality
 function handleSnapZones(e, x, y) {
   if (!activeWindow) return;
   
-  // Create snap indicators if they don't exist
   createSnapZones();
   
   const windowRect = activeWindow.getBoundingClientRect();
   const windowWidth = windowRect.width;
   const windowHeight = windowRect.height;
   
-  // Check if near screen edges
   const snapThreshold = 30;
   
-  // Near left edge
   if (x < snapThreshold) {
     showSnapZone('left');
   } 
-  // Near right edge
   else if (x + windowWidth > window.innerWidth - snapThreshold) {
     showSnapZone('right');
   }
-  // Near top (maximized)
   else if (y < snapThreshold) {
     showSnapZone('top');
   }
-  // Reset if not near any edge
   else {
     hideSnapZones();
   }
   
-  // Apply snap on mouseup
   document.addEventListener('mouseup', snapWindow, { once: true });
 }
 
@@ -80,11 +69,9 @@ function snapWindow() {
   const y = windowRect.top;
   const snapThreshold = 30;
   
-  // Get visible snap zone
   const visibleZone = document.querySelector('.snap-zone:not(.hidden)');
   if (!visibleZone) return;
   
-  // Apply based on zone id
   const zoneId = visibleZone.id;
   
   switch(zoneId) {
@@ -114,7 +101,6 @@ function createSnapZones() {
   const snapZones = document.createElement('div');
   snapZones.id = 'snap-zones';
   
-  // Create left, right, and top snap zones
   const zones = ['left', 'right', 'top'];
   
   zones.forEach(zone => {
@@ -122,7 +108,6 @@ function createSnapZones() {
     snapZone.id = `snap-${zone}`;
     snapZone.className = 'snap-zone hidden';
     
-    // Add preview image for each zone
     const preview = document.createElement('div');
     preview.className = 'snap-preview';
     snapZone.appendChild(preview);
@@ -152,7 +137,6 @@ function setupResizeHandles() {
   windows.forEach(win => {
     if (win.querySelector('.resize-handle')) return;
     
-    // Create resize handles for each corner and edge
     const positions = ['n', 'e', 's', 'w', 'ne', 'se', 'sw', 'nw'];
     
     positions.forEach(pos => {
@@ -186,7 +170,6 @@ function startResize(e, win, position) {
     const dx = e.clientX - initialMouseX;
     const dy = e.clientY - initialMouseY;
     
-    // Apply width/height changes based on which handle was grabbed
     if (position.includes('e')) {
       win.style.width = `${initialWidth + dx}px`;
     }
@@ -261,7 +244,8 @@ function toggleApp(id) {
     focusWindow(app);
   } else if (app === getActiveWindow()) {
     minimizeApp(id);
-  } else {
+  }
+  else {
     focusWindow(app);
   }
 }
@@ -291,7 +275,8 @@ function maximizeApp(id) {
   
   if (win.classList.contains('maximized')) {
     win.classList.remove('maximized');
-  } else {
+  }
+  else {
     win.classList.add('maximized');
   }
 }
@@ -367,4 +352,4 @@ export {
   focusWindow, 
   toggleStartMenu, 
   closeStartMenu 
-}; 
+};

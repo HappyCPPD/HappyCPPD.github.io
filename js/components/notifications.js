@@ -1,4 +1,3 @@
-// Notification system
 function showNotification(message = 'Welcome to my portfolio!', icon = 'info-circle') {
   const notification = document.getElementById('notification');
   const text = notification.querySelector('.notification-text');
@@ -19,4 +18,4 @@ function closeNotification() {
   notification.style.display = 'none';
 }
 
-export { showNotification, closeNotification }; 
+export { showNotification, closeNotification };

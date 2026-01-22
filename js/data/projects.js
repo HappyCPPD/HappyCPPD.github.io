@@ -1,7 +1,5 @@
-// Project data loader
 const projects = [];
 
-// Function to dynamically load project data from JSON files
 export async function loadProjects() {
     const projectFiles = [
         './projects_data/proj1.json',
@@ -10,6 +8,9 @@ export async function loadProjects() {
     ];
 
     for (const file of projectFiles) {
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/bf38b77b-cd3a-4dfa-a70d-82da814616e6',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'projects.js:13',message:'Attempting to fetch project file',data:{file: file},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'1'})}).catch(()=>{});
+        // #endregion
         try {
             const response = await fetch(file);
             if (!response.ok) {
@@ -24,5 +25,4 @@ export async function loadProjects() {
     return projects;
 }
 
-// Export the projects array for direct use after loading
 export { projects };

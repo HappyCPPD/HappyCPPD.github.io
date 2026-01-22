@@ -172,7 +172,8 @@ function toggleApp(id) {
     focusWindow(app);
   } else if (app === getActiveWindow()) {
     minimizeApp(id);
-  } else {
+  }
+  else {
     focusWindow(app);
   }
 }
@@ -202,7 +203,8 @@ function maximizeApp(id) {
   
   if (win.classList.contains('maximized')) {
     win.classList.remove('maximized');
-  } else {
+  }
+  else {
     win.classList.add('maximized');
   }
 }

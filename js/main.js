@@ -1,4 +1,3 @@
-// Main entry point for the application
 import { initBootScreen } from './components/bootScreen.js';
 import { startDrag, toggleStartMenu, closeStartMenu, launchApp, minimizeApp, maximizeApp, closeApp, toggleApp } from './components/windowManager.js';
 import { handleTerminal } from './components/terminalManager.js';
@@ -21,11 +20,10 @@ window.closeNotification = closeNotification;
 window.toggleTheme = toggleTheme;
 window.createWallpaperSelector = createWallpaperSelector;
 
-// Initialize on window load
 window.onload = async () => {
   initBootScreen();
   initTheme();
   initWallpaper();
   setupProjectFilters();
   await populateProjects();
-}; 
+};

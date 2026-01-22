@@ -1,4 +1,3 @@
-/* Notifications */
 .notification {
   position: fixed;
   top: 20px;
@@ -47,4 +46,4 @@
 
 .notification-close:hover {
   color: var(--error-color);
-} 
+}

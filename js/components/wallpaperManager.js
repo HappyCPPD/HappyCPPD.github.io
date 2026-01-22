@@ -1,7 +1,5 @@
-// Wallpaper manager
 const WALLPAPER_KEY = 'portfolio-wallpaper-preference';
 
-// Collection of wallpapers
 const wallpapers = [
   {
     id: 'default',
@@ -40,9 +38,7 @@ const wallpapers = [
   }
 ];
 
-// Initialize wallpaper from localStorage
 function initWallpaper() {
-  // Check localStorage for saved preference
   const savedWallpaperId = localStorage.getItem(WALLPAPER_KEY);
   
   if (savedWallpaperId) {
@@ -53,15 +49,12 @@ function initWallpaper() {
   }
 }
 
-// Set wallpaper
 function setWallpaper(wallpaper) {
   document.body.style.backgroundImage = `url('${wallpaper.url}')`;
   localStorage.setItem(WALLPAPER_KEY, wallpaper.id);
 }
 
-// Create wallpaper selector window
 function createWallpaperSelector() {
-  // Check if a wallpaper window already exists
   if (document.getElementById('wallpaper-selector')) {
     document.getElementById('wallpaper-selector').style.display = 'block';
     return;
@@ -88,14 +81,14 @@ function createWallpaperSelector() {
   
   document.body.appendChild(wallpaperWindow);
   
-  // Position the window
+  
   wallpaperWindow.style.left = `${window.innerWidth / 2 - 350}px`;
   wallpaperWindow.style.top = `${window.innerHeight / 2 - 250}px`;
   wallpaperWindow.style.display = 'block';
   wallpaperWindow.style.width = '700px';
   wallpaperWindow.style.height = '500px';
   
-  // Create taskbar button
+  
   const taskBtn = document.createElement('button');
   taskBtn.id = `task-wallpaper-selector`;
   taskBtn.className = 'task-btn active';
@@ -103,14 +96,13 @@ function createWallpaperSelector() {
   taskBtn.onclick = () => window.toggleApp('wallpaper-selector');
   document.getElementById('task-items').appendChild(taskBtn);
   
-  // Populate wallpapers
+  
   populateWallpapers();
   
-  // Focus the window
+  
   window.focusWindow(wallpaperWindow);
 }
 
-// Populate wallpaper grid
 function populateWallpapers() {
   const grid = document.querySelector('.wallpaper-grid');
   if (!grid) return;
@@ -127,18 +119,18 @@ function populateWallpapers() {
       <div class="wallpaper-name">${wallpaper.name}</div>
     `;
     
-    // Click handler
+    
     item.addEventListener('click', () => {
       setWallpaper(wallpaper);
       
-      // Set active class on selected wallpaper
+      
       document.querySelectorAll('.wallpaper-item').forEach(el => {
         el.classList.remove('active');
       });
       item.classList.add('active');
     });
     
-    // Check if current wallpaper
+    
     const currentWallpaperId = localStorage.getItem(WALLPAPER_KEY);
     if (currentWallpaperId === wallpaper.id) {
       item.classList.add('active');
@@ -148,4 +140,4 @@ function populateWallpapers() {
   });
 }
 
-export { initWallpaper, createWallpaperSelector }; 
+export { initWallpaper, createWallpaperSelector };

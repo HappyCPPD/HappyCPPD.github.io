@@ -1,4 +1,3 @@
-/* Main CSS file that imports all modular CSS components */
 @import 'base.css';
 @import 'boot-screen.css';
 @import 'desktop.css';
@@ -8,4 +7,4 @@
 @import 'projects.css';
 @import 'contact.css';
 @import 'terminal.css';
-@import 'notifications.css'; 
+@import 'notifications.css';

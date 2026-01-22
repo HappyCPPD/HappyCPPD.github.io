@@ -1,4 +1,3 @@
-// Boot screen initialization and animation
 const initBootScreen = () => {
   const welcomeText = "Welcome To My Portfolio";
   const loadingText = "Loading Portfolio...";
@@ -33,7 +32,6 @@ const initBootScreen = () => {
           setTimeout(() => {
             bootScreen.style.display = 'none';
             document.getElementById('desktop').style.display = 'flex';
-            // Import initDesktop from desktopManager
             import('./desktopManager.js').then(module => {
               module.initDesktop();
             });
@@ -44,4 +42,4 @@ const initBootScreen = () => {
   }
 };
 
-export { initBootScreen }; 
+export { initBootScreen };

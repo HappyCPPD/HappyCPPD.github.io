@@ -1,5 +1,4 @@
 :root {
-  /* Dark theme (default) */
   --primary-color: #2563eb;
   --secondary-color: #1e40af;
   --accent-color: #3b82f6;
@@ -13,7 +12,6 @@
   --error-color: #ef4444;
   --warning-color: #f59e0b;
   
-  /* Light theme */
   --lt-primary-color: #3b82f6;
   --lt-secondary-color: #2563eb;
   --lt-accent-color: #60a5fa;
@@ -111,7 +109,6 @@ body.light-theme {
   background: rgba(255, 255, 255, 0.4);
 }
 
-/* Animations */
 @keyframes fadeOut {
   to { opacity: 0; visibility: hidden; }
 }
@@ -136,7 +133,6 @@ body.light-theme {
   to { opacity: 1; }
 }
 
-/* Media Queries */
 @media screen and (max-width: 768px) {
   .app-window {
     width: 90% !important;
@@ -164,4 +160,4 @@ body.light-theme {
 
 .animate-in {
   animation: fadeIn 0.5s ease forwards;
-} 
+}
