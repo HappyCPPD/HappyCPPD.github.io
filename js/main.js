@@ -7,7 +7,6 @@ import { initTheme, toggleTheme } from './components/themeManager.js';
 import { initWallpaper, createWallpaperSelector } from './components/wallpaperManager.js';
 import { setupProjectFilters, populateProjects } from './components/projectsManager.js';
 
-// Make functions available globally
 window.startDrag = startDrag;
 window.toggleStartMenu = toggleStartMenu;
 window.closeStartMenu = closeStartMenu;
