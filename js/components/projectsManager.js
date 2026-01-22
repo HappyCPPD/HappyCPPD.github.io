@@ -1,13 +1,8 @@
 // Projects management system
-import projectsPromise from '../data/projects.js';
 
-let projects = [];
+import { projects, loadProjects } from '../data/projects.js';
 
 // Load projects when the module initializes
-projectsPromise.then(loadedProjects => {
-    projects = loadedProjects;
-    populateProjects(); // Populate projects after they are loaded
-});
 import { focusWindow } from './windowManager.js';
 
 function setupProjectFilters() {
@@ -21,7 +16,8 @@ function setupProjectFilters() {
   });
 }
 
-function populateProjects(filter = 'all') {
+async function populateProjects(filter = 'all') {
+  await loadProjects();
   const container = document.getElementById('project-list');
   container.innerHTML = '';
   

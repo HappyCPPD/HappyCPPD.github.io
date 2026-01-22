@@ -22,10 +22,10 @@ window.toggleTheme = toggleTheme;
 window.createWallpaperSelector = createWallpaperSelector;
 
 // Initialize on window load
-window.onload = () => {
+window.onload = async () => {
   initBootScreen();
   initTheme();
   initWallpaper();
   setupProjectFilters();
-  populateProjects();
+  await populateProjects();
 }; 
