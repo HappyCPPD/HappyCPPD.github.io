@@ -1,0 +1,9 @@
+{
+    "id": "proj4",
+    "name": "Space Colonization Algorithm",
+    "summary": "An interactive generative art simulation that models organic branching structures.",
+    "img": "images/Space Colonization.png",
+    "details": "Developed in JavaScript using HTML5 Canvas, this project implements the space colonization algorithm to procedurally generate trees, neural networks, and root systems based on dynamic attraction points.",
+    "category": "javascript",
+    "github_link": "https://github.com/HappyCPPD/Space-Colonization-Algorithm"
+}
