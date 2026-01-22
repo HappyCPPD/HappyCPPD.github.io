@@ -2,7 +2,7 @@
 const projects = [];
 
 // Function to dynamically load project data from JSON files
-async function loadProjects() {
+export async function loadProjects() {
     const projectFiles = [
         './projects_data/proj1.json',
         './projects_data/proj2.json',
@@ -24,9 +24,5 @@ async function loadProjects() {
     return projects;
 }
 
-// Export the promise that resolves with the loaded projects
-const projectsPromise = loadProjects();
-
-export default projectsPromise;
-
-export default projects; 
+// Export the projects array for direct use after loading
+export { projects };
