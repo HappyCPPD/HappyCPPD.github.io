@@ -5,7 +5,6 @@ import { handleTerminal } from './components/terminalManager.js';
 import { showNotification, closeNotification } from './components/notifications.js';
 import { initTheme, toggleTheme } from './components/themeManager.js';
 import { initWallpaper, createWallpaperSelector } from './components/wallpaperManager.js';
-import { setupProjectFilters, populateProjects } from './components/projectsManager.js';
 
 // Make functions available globally
 window.startDrag = startDrag;
@@ -27,6 +26,4 @@ window.onload = () => {
   initBootScreen();
   initTheme();
   initWallpaper();
-  setupProjectFilters();
-  populateProjects();
 }; 

@@ -1,10 +1,22 @@
-// Boot screen initialization and animation
-const initBootScreen = () => {
+// Boot Screen initialization
+import { initDesktop } from './desktopManager.js';
+
+export function initBootScreen() {
   const welcomeText = "Welcome To My Portfolio";
   const loadingText = "Loading Portfolio...";
   const bootScreen = document.getElementById('boot-screen');
   const welcomeEl = document.querySelector('#boot-screen h1');
   const loadingEl = document.querySelector('#boot-screen p');
+  
+  if (!welcomeEl || !loadingEl) {
+    // If elements don't exist, skip boot screen
+    setTimeout(() => {
+      if (bootScreen) bootScreen.style.display = 'none';
+      document.getElementById('desktop').style.display = 'flex';
+      initDesktop();
+    }, 500);
+    return;
+  }
   
   welcomeEl.textContent = '';
   loadingEl.textContent = '';
@@ -33,15 +45,10 @@ const initBootScreen = () => {
           setTimeout(() => {
             bootScreen.style.display = 'none';
             document.getElementById('desktop').style.display = 'flex';
-            // Import initDesktop from desktopManager
-            import('./desktopManager.js').then(module => {
-              module.initDesktop();
-            });
+            initDesktop();
           }, 1000);
         }, 2000);
       }
     }, 50);
   }
-};
-
-export { initBootScreen }; 
+}

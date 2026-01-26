@@ -1,10 +1,11 @@
 // Desktop initialization and management
-import projects from '../data/projects.js';
+import projectsPromise from '../data/projects.js';
 import { showNotification } from './notifications.js';
 import { setupProjectFilters, populateProjects, openProjectWindow } from './projectsManager.js';
 import { setupResizeHandles } from './windowManager.js';
 
 function initDesktop() {
+  // Projects are already loaded and set in projectsManager via projectsPromise
   populateProjects('all');
   
   updateDateTime();
@@ -59,4 +60,5 @@ function positionWindows() {
   });
 }
 
+export { initDesktop };
 export { initDesktop, updateDateTime, positionWindows }; 

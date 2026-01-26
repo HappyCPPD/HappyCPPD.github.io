@@ -159,8 +159,6 @@ function processCommand(command, output) {
       ];
       
       const word = words[Math.floor(Math.random() * words.length)];
-      let guessedLetters = [];
-      let remainingAttempts = 6;
       
       output.innerHTML += `
         <div class="terminal-line">Hangman game started!</div>
@@ -170,100 +168,52 @@ function processCommand(command, output) {
         <div id="hangman-game" class="terminal-game"></div>
       `;
       
-      function updateHangmanDisplay() {
-        const hangmanArt = [
-          `
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========`,
-          `
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========`,
-          `
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========`,
-          `
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========`,
-          `
-  +---+
-  |   |
-  O   |
- /|\\  |
-      |
-      |
-=========`,
-          `
-  +---+
-  |   |
-  O   |
- /|\\  |
- /    |
-      |
-=========`,
-          `
-  +---+
-  |   |
-  O   |
- /|\\  |
- / \\  |
-      |
-=========`
-        ];
-        
-        // Display current state
-        let displayWord = '';
-        for (let char of word) {
-          if (guessedLetters.includes(char)) {
-            displayWord += char + ' ';
-          } else {
-            displayWord += '_ ';
-          }
-        }
-        
-        const gameElement = document.getElementById('hangman-game');
-        gameElement.innerHTML = `
-          <div class="terminal-line">${hangmanArt[6 - remainingAttempts]}</div>
-          <div class="terminal-line">Word: ${displayWord}</div>
-          <div class="terminal-line">Guessed letters: ${guessedLetters.join(', ')}</div>
-          <div class="terminal-line">Remaining attempts: ${remainingAttempts}</div>
-        `;
-        
-        // Check win/lose condition
-        if (!displayWord.includes('_')) {
-          output.innerHTML += `<div class="terminal-line">Congratulations! You guessed the word: ${word}</div>`;
-          hangmanGame.isRunning = false;
-        } else if (remainingAttempts === 0) {
-          output.innerHTML += `<div class="terminal-line">Game over! The word was: ${word}</div>`;
-          hangmanGame.isRunning = false;
-        }
-      }
-      
-      // Initialize the game state
+      // Initialize the game state with methods to update display
       hangmanGame = {
         isRunning: true,
         word: word,
-        guessedLetters: guessedLetters,
-        remainingAttempts: remainingAttempts,
+        guessedLetters: [],
+        remainingAttempts: 6,
+        updateDisplay: function() {
+          const hangmanArt = [
+            `  +---+\n  |   |\n      |\n      |\n      |\n      |\n=========`,
+            `  +---+\n  |   |\n  O   |\n      |\n      |\n      |\n=========`,
+            `  +---+\n  |   |\n  O   |\n  |   |\n      |\n      |\n=========`,
+            `  +---+\n  |   |\n  O   |\n /|   |\n      |\n      |\n=========`,
+            `  +---+\n  |   |\n  O   |\n /|\\  |\n      |\n      |\n=========`,
+            `  +---+\n  |   |\n  O   |\n /|\\  |\n /    |\n      |\n=========`,
+            `  +---+\n  |   |\n  O   |\n /|\\  |\n / \\  |\n      |\n=========`
+          ];
+          
+          // Display current state
+          let displayWord = '';
+          for (let char of this.word) {
+            if (this.guessedLetters.includes(char)) {
+              displayWord += char + ' ';
+            } else {
+              displayWord += '_ ';
+            }
+          }
+          
+          const gameElement = document.getElementById('hangman-game');
+          if (gameElement) {
+            gameElement.innerHTML = `
+              <div class="terminal-line"><pre>${hangmanArt[6 - this.remainingAttempts]}</pre></div>
+              <div class="terminal-line">Word: ${displayWord}</div>
+              <div class="terminal-line">Guessed letters: ${this.guessedLetters.join(', ')}</div>
+              <div class="terminal-line">Remaining attempts: ${this.remainingAttempts}</div>
+            `;
+          }
+          
+          // Check win/lose condition
+          if (!displayWord.includes('_')) {
+            output.innerHTML += `<div class="terminal-line">Congratulations! You guessed the word: ${this.word}</div>`;
+            this.isRunning = false;
+          } else if (this.remainingAttempts === 0) {
+            output.innerHTML += `<div class="terminal-line">Game over! The word was: ${this.word}</div>`;
+            this.isRunning = false;
+          }
+        },
         handleGuess: function(guess) {
           if (guess === 'quit') {
             output.innerHTML += `<div class="terminal-line">Game over! The word was ${this.word}.</div>`;
@@ -289,11 +239,11 @@ function processCommand(command, output) {
             this.remainingAttempts--;
           }
           
-          updateHangmanDisplay();
+          this.updateDisplay();
         }
       };
       
-      updateHangmanDisplay();
+      hangmanGame.updateDisplay();
     },
     fortune: () => {
       const fortunes = [

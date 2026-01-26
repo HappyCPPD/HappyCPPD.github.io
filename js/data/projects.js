@@ -6,7 +6,10 @@ async function loadProjects() {
     const projectFiles = [
         './js/data/projects_data/proj1.json',
         './js/data/projects_data/proj2.json',
-        './js/data/projects_data/proj3.json'
+        './js/data/projects_data/proj3.json',
+        './js/data/projects_data/proj4.json',
+        './js/data/projects_data/proj5.json',
+        './js/data/projects_data/proj6.json'
     ];
 
     for (const file of projectFiles) {
@@ -27,6 +30,4 @@ async function loadProjects() {
 // Export the promise that resolves with the loaded projects
 const projectsPromise = loadProjects();
 
-export default projectsPromise;
-
-export default projects; 
+export default projectsPromise; 
