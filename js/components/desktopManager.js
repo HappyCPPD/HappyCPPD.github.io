@@ -60,5 +60,4 @@ function positionWindows() {
   });
 }
 
-export { initDesktop };
-export { initDesktop, updateDateTime, positionWindows }; 
+export { initDesktop }; 
