@@ -4,9 +4,9 @@ const projects = [];
 // Function to dynamically load project data from JSON files
 async function loadProjects() {
     const projectFiles = [
-        './projects_data/proj1.json',
-        './projects_data/proj2.json',
-        './projects_data/proj3.json'
+        './js/data/projects_data/proj1.json',
+        './js/data/projects_data/proj2.json',
+        './js/data/projects_data/proj3.json'
     ];
 
     for (const file of projectFiles) {
