@@ -1,229 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio</title>
-  <link rel="stylesheet" href="css/index.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ashton - Second-Year Cybersecurity Student passionate about data-driven security and coding solutions.">
+    <title>Ashton | Cybersecurity Student</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
-  <div id="boot-screen">
-    <h1>Welcome</h1>
-    <p>Loading Portfolio...</p>
-    <div class="progress-container">
-      <div class="progress-bar"></div>
-    </div>
-  </div>
-  <div id="desktop" style="display: none;">
-    <div id="icons">
-      <div class="icon" onclick="launchApp('about')">
-        <div class="icon-bg">
-          <i class="fas fa-user"></i>
-        </div>
-        <span>About Me</span>
-      </div>
-      <div class="icon" onclick="launchApp('projects')">
-        <div class="icon-bg">
-          <i class="fas fa-laptop-code"></i>
-        </div>
-        <span>Projects</span>
-      </div>
-      <div class="icon" onclick="launchApp('contact')">
-        <div class="icon-bg">
-          <i class="fas fa-envelope"></i>
-        </div>
-        <span>Contact</span>
-      </div>
-      <div class="icon" onclick="launchApp('terminal')">
-        <div class="icon-bg">
-          <i class="fas fa-terminal"></i>
-        </div>
-        <span>Terminal</span>
-      </div>
-      <div class="icon" onclick="createWallpaperSelector()">
-        <div class="icon-bg">
-          <i class="fas fa-image"></i>
-        </div>
-        <span>Wallpapers</span>
-      </div>
-    </div>
-    <div id="taskbar">
-      <div id="start-menu-button" onclick="toggleStartMenu()">
-        <i class="fas fa-th"></i>
-      </div>
-      <div id="start-menu" style="display: none;">
-        <div class="menu-header">
-          <img src="images\happy-1024.png" alt="Profile" class="profile-pic">
-          <div>My Portfolio</div>
-        </div>
-        <div class="menu-item" onclick="launchApp('about')">
-          <i class="fas fa-user"></i> About Me
-        </div>
-        <div class="menu-item" onclick="launchApp('projects')">
-          <i class="fas fa-laptop-code"></i> Projects
-        </div>
-        <div class="menu-item" onclick="launchApp('contact')">
-          <i class="fas fa-envelope"></i> Contact
-        </div>
-        <div class="menu-item" onclick="launchApp('terminal')">
-          <i class="fas fa-terminal"></i> Terminal
-        </div>
-      </div>
-      <div id="task-items"></div>
-      <div id="datetime"></div>
-    </div>
-    <div id="about" class="app-window">
-      <div class="title-bar" onmousedown="startDrag(event, this)">
-        <div class="window-icon"><i class="fas fa-user"></i></div>
-        <span>About Me</span>
-        <div class="window-controls">
-          <button onclick="minimizeApp('about')"><i class="fas fa-window-minimize"></i></button>
-          <button onclick="maximizeApp('about')"><i class="fas fa-window-maximize"></i></button>
-          <button onclick="closeApp('about')"><i class="fas fa-times"></i></button>
-        </div>
-      </div>
-      <div class="window-sidebar">
-        <div class="sidebar-item active"><i class="fas fa-home"></i> Home</div>
-      </div>
-      <div class="content with-sidebar">
-        <div class="about-header">
-          <img src="images\happy-1024.png" alt="Profile" class="profile-pic">
-          <div>
-            <h2>Ashton Ang</h2>
-            <p class="subtitle">Student Developer</p>
-          </div>
-        </div>
-        <div class="about-content">
-            <p>Hello! I'm Ashton, a student who enjoys programming and learning about cybersecurity.</p>
-            <p>I like building small tools and apps, especially ones that help me understand how things work or explore how to keep systems safe.</p>           
-          <div class="skill-section">
-            <h3>My Skills</h3>
-            <div class="skill-bars">
-              <div class="skill">
-                <span>Python</span>
-                <div class="skill-bar"><div class="skill-level" style="width: 45%"></div></div>
-              </div>
-              <div class="skill">
-                <span>Html</span>
-                <div class="skill-bar"><div class="skill-level" style="width: 65%"></div></div>
-              </div>
-              <div class="skill">
-                <span>C#</span>
-                <div class="skill-bar"><div class="skill-level" style="width: 15%"></div></div>
-              </div>
-              <div class="skill">
-                <span>JavaScript</span>
-                <div class="skill-bar"><div class="skill-level" style="width: 30%"></div></div>
-              </div>
-              <div class="skill">
-                <span>Bash</span>
-                <div class="skill-bar"><div class="skill-level" style="width: 50%"></div></div>
-              </div>
-              <div class="skill">
-                <span>Lua</span>
-                <div class="skill-bar"><div class="skill-level" style="width: 70%"></div></div>
-              </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">A<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-    <div id="projects" class="app-window">
-      <div class="title-bar" onmousedown="startDrag(event, this)">
-        <div class="window-icon"><i class="fas fa-laptop-code"></i></div>
-        <span>Projects</span>
-        <div class="window-controls">
-          <button onclick="minimizeApp('projects')"><i class="fas fa-window-minimize"></i></button>
-          <button onclick="maximizeApp('projects')"><i class="fas fa-window-maximize"></i></button>
-          <button onclick="closeApp('projects')"><i class="fas fa-times"></i></button>
-        </div>
-      </div>
-      <div class="content">
-        <div class="projects-filter">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="python">Python</button>
-          <button class="filter-btn" data-filter="bash">Bash</button>
-          <button class="filter-btn" data-filter="web">Web</button>
-          <button class="filter-btn" data-filter="javascript">JavaScript</button>
-        </div>
-        <div id="project-list" class="project-grid"></div>
-      </div>
-    </div>
-    <div id="contact" class="app-window">
-      <div class="title-bar" onmousedown="startDrag(event, this)">
-        <div class="window-icon"><i class="fas fa-envelope"></i></div>
-        <span>Contact</span>
-        <div class="window-controls">
-          <button onclick="minimizeApp('contact')"><i class="fas fa-window-minimize"></i></button>
-          <button onclick="maximizeApp('contact')"><i class="fas fa-window-maximize"></i></button>
-          <button onclick="closeApp('contact')"><i class="fas fa-times"></i></button>
-        </div>
-      </div>
-      <div class="content">
-        <div class="contact-container">
-          <div class="contact-info">
-            <h2>Let's Connect!</h2>
-            <p class="contact-intro">Feel free to reach out to me through any of these platforms:</p>
-            
-            <div class="contact-item">
-              <i class="fas fa-envelope"></i>
-              <div class="contact-detail">
-                <span class="contact-label">Email</span>
-                <a href="mailto:AshtonAng77@gmail.com">AshtonAng77@gmail.com</a>
-              </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content fade-in">
+                    <p class="hero-greeting">Hi, my name is</p>
+                    <h1 class="hero-name">Ashton Ang Wu Zun.</h1>
+                    <h2 class="hero-title">Second-Year Cybersecurity Student</h2>
+                    <p class="hero-description">
+                        I'm incredibly excited and grateful to be on this journey, learning how to tackle complex problems and build safer digital spaces. My focus is on mastering cybersecurity fundamentals while exploring data-driven security solutions.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="projects.html" class="btn btn-primary">View My Work</a>
+                        <a href="contact.html" class="btn btn-outline">Get In Touch</a>
+                    </div>
+                </div>
             </div>
-            
-            <div class="contact-item">
-              <i class="fab fa-github"></i>
-              <div class="contact-detail">
-                <span class="contact-label">GitHub</span>
-                <a href="https://github.com/HappyCPPD" target="_blank">github.com/HappyCPPD</a>
-              </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title fade-in"><span>//</span> About Me</h2>
+                <div class="about-content">
+                    <div class="about-text fade-in">
+                        <p>
+                            Hello! I'm Ashton, a second-year cybersecurity student. I'm incredibly excited and grateful to be on this journey, learning how to tackle complex problems and build safer digital spaces.
+                        </p>
+                        <p>
+                            My main focus right now is mastering the fundamentals of cybersecurity to build a rock-solid foundation for my professional career. Alongside security concepts, I love writing code to find better solutions to problems.
+                        </p>
+                        <p>
+                            Recently, I've been exploring data-driven security, experimenting with machine learning and data analysis to see how we can add smart features that proactively keep systems safe.
+                        </p>
+                    </div>
+                    <div class="tech-stack fade-in">
+                        <h3>My Tech Stack</h3>
+                        <div class="stack-category">
+                            <h4>Languages</h4>
+                            <div class="stack-items">
+                                <span class="stack-item">Python</span>
+                                <span class="stack-item">Java</span>
+                                <span class="stack-item">C#</span>
+                                <span class="stack-item">C++</span>
+                                <span class="stack-item">Shell</span>
+                            </div>
+                        </div>
+                        <div class="stack-category">
+                            <h4>Data & AI</h4>
+                            <div class="stack-items">
+                                <span class="stack-item">TensorFlow</span>
+                                <span class="stack-item">PyTorch</span>
+                                <span class="stack-item">Pandas</span>
+                            </div>
+                        </div>
+                        <div class="stack-category">
+                            <h4>Web & Databases</h4>
+                            <div class="stack-items">
+                                <span class="stack-item">HTML</span>
+                                <span class="stack-item">CSS</span>
+                                <span class="stack-item">JavaScript</span>
+                                <span class="stack-item">SQL</span>
+                            </div>
+                        </div>
+                        <div class="stack-category">
+                            <h4>Core Focus</h4>
+                            <div class="stack-items">
+                                <span class="stack-item">Problem-solving</span>
+                                <span class="stack-item">Data-driven Security</span>
+                                <span class="stack-item">Network Fundamentals</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="contact-item">
-              <i class="fab fa-linkedin"></i>
-              <div class="contact-detail">
-                <span class="contact-label">LinkedIn</span>
-                <a href="https://linkedin.com/in/ashton-ang-846999353/" target="_blank">linkedin.com/in/ashton-ang-846999353/</a>
-              </div>
+        </section>
+
+        <!-- Featured Projects -->
+        <section class="featured-projects">
+            <div class="container">
+                <h2 class="section-title fade-in"><span>//</span> Featured Projects</h2>
+                <p class="section-subtitle fade-in">A selection of things I've built</p>
+
+                <div class="projects-grid">
+                    <div class="project-card fade-in">
+                        <span class="project-number">01</span>
+                        <h3>Automated Reconnaissance Tool</h3>
+                        <p>A Shell script built to automate the information-gathering phase of security testing, chaining together scanning tasks to output clean, actionable data.</p>
+                        <div class="tags mb-3">
+                            <span class="tag">Shell</span>
+                            <span class="tag">Security</span>
+                            <span class="tag">Automation</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/HappyCPPD/Automated-Recon-Tool/tree/main" class="project-link" target="_blank">GitHub ↗</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card fade-in">
+                        <span class="project-number">02</span>
+                        <h3>Encrypted Client-Server Chatroom</h3>
+                        <p>A custom chat application built from scratch in Python that encrypts messages in transit, demonstrating secure communication protocols.</p>
+                        <div class="tags mb-3">
+                            <span class="tag">Python</span>
+                            <span class="tag">Encryption</span>
+                            <span class="tag">Networking</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/HappyCPPD/Chatroom-with-encrypter/tree/main" class="project-link" target="_blank">Encrypted Ver. ↗</a>
+                            <a href="https://github.com/HappyCPPD/python-chat-room/tree/main" class="project-link" target="_blank">Base Ver. ↗</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card fade-in">
+                        <span class="project-number">03</span>
+                        <h3>Algorithmic Procedural Generation</h3>
+                        <p>Python scripts using Space Colonization and Fractal Tree algorithms to generate organic growth patterns through complex data structures.</p>
+                        <div class="tags mb-3">
+                            <span class="tag">Python</span>
+                            <span class="tag">Algorithms</span>
+                            <span class="tag">Visualization</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://happycppd.github.io/Space-Colonization-Algorithm/" class="project-link" target="_blank">Live Demo ↗</a>
+                            <a href="https://github.com/HappyCPPD/Fractal-Tree" class="project-link" target="_blank">Fractal Tree ↗</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="view-all fade-in">
+                    <a href="projects.html" class="btn btn-outline">View All Projects</a>
+                </div>
             </div>
-            
-            <div class="contact-footer">
-              <p>I'm currently interested in opportunities related to development and cybersecurity!</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/HappyCPPD" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/ashton-ang-wu-zun-846999353/" target="_blank">LinkedIn</a>
+                <a href="mailto:AshtonAng77@gmail.com">Email</a>
             </div>
-          </div>
+            <p class="footer-text">Designed & Built by Ashton</p>
         </div>
-      </div>
-    </div>
-    <div id="terminal" class="app-window">
-      <div class="title-bar" onmousedown="startDrag(event, this)">
-        <div class="window-icon"><i class="fas fa-terminal"></i></div>
-        <span>Terminal</span>
-        <div class="window-controls">
-          <button onclick="minimizeApp('terminal')"><i class="fas fa-window-minimize"></i></button>
-          <button onclick="maximizeApp('terminal')"><i class="fas fa-window-maximize"></i></button>
-          <button onclick="closeApp('terminal')"><i class="fas fa-times"></i></button>
-        </div>
-      </div>
-      <div class="content terminal">
-        <div id="terminal-output">Welcome to my Portfolio
-Type <strong>help</strong> for a list of commands.</div>
-        <div class="terminal-input-line">
-          <span class="terminal-prompt">guest@portfolio:~$</span>
-          <input type="text" id="terminal-input" placeholder="" onkeydown="handleTerminal(event)">
-        </div>
-      </div>
-    </div>
-    <div class="notification" id="notification" style="display: none;">
-      <div class="notification-content">
-        <i class="notification-icon fas fa-info-circle"></i>
-        <div class="notification-text">Welcome to my portfolio!</div>
-      </div>
-      <button class="notification-close" onclick="closeNotification()">×</button>
-    </div>
-  </div>
-  <script type="module" src="js/main.js"></script>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/home.js"></script>
 </body>
 </html>

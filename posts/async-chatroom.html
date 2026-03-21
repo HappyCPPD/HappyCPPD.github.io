@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lab Notes: Building an Asynchronous Chatroom with WebSockets - Learning networking fundamentals with Python">
+    <title>Building an Async Chatroom | Ashton</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/blog.css">
+    <link rel="stylesheet" href="../css/post.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">A<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../blog.html" class="active">Blog</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <article class="blog-post-page">
+            <div class="container">
+                <!-- Back Link -->
+                <a href="../blog.html" class="back-link fade-in">&larr; Back to Blog</a>
+
+                <!-- Post Header -->
+                <header class="post-header fade-in">
+                    <div class="blog-card-meta">
+                        <span class="blog-date">April 2025</span>
+                        <span class="blog-category">Lab Notes</span>
+                    </div>
+                    <h1>Lab Notes: Building an Asynchronous Chatroom with WebSockets</h1>
+                    <div class="blog-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">WebSockets</span>
+                        <span class="tag">Networking</span>
+                        <span class="tag">Asyncio</span>
+                    </div>
+                </header>
+
+                <!-- Post Content -->
+                <div class="post-content fade-in">
+                    <h2>The Goal</h2>
+                    <p>As part of my journey into cybersecurity, I wanted to really understand how data moves back and forth in real-time. Before I can secure a network, I need to know how to build one. My goal for this project was to create a functioning client-server chat application from scratch using Python.</p>
+
+                    <h2>The Architecture and Logic</h2>
+                    <p>I decided to use WebSockets instead of standard TCP sockets because they are great for continuous, two-way communication. I mapped out the logic into two main pieces:</p>
+
+                    <p><strong>The Server (main.py):</strong> Acts as the central hub. It needs to keep a running list (a set()) of everyone who connects. When someone sends a message, the server catches it and loops through the set to broadcast that message to everyone else.</p>
+
+                    <p><strong>The Client (client.py):</strong> Connects to the server and handles the user interface. It needs to do two things at the exact same time: listen for new messages from the server, and wait for the user to type something on their keyboard.</p>
+
+                    <h2>The Roadblocks: Concurrency and Blocking</h2>
+                    <p>The biggest challenge I hit was getting the client to do two things at once.</p>
+
+                    <p>In Python, the input() function is "blocking." That means if the program is waiting for me to type a message, it completely freezes. It won't print incoming messages from other people until I press enter.</p>
+
+                    <p>I knew the logical solution was concurrency (running tasks simultaneously), but Python's asyncio library syntax can get complicated. I used AI-assisted coding to help me figure out the exact syntax needed. The solution was using asyncio.gather() to run my send and receive functions at the same time, and using loop.run_in_executor to push the blocking keyboard input into a background thread.</p>
+
+                    <p>I acted as the architect, figuring out why it was breaking, and used AI to help me write the specific asynchronous boilerplate to fix it.</p>
+
+                    <h2>The Takeaway</h2>
+                    <p>Getting the chatroom working was a huge win. It proved I could design a stable client-server architecture and handle asynchronous data flows.</p>
+
+                    <p>Right now, all the messages are sent in plain text. For a cybersecurity student, that's a big red flag. My next step for this project is to build an encryption layer on top of this foundation so the data is scrambled before it ever hits the WebSocket.</p>
+
+                    <div class="post-cta">
+                        <a href="https://github.com/HappyCPPD/python-chat-room/tree/main" class="btn btn-primary" target="_blank">View Source Code</a>
+                    </div>
+                </div>
+
+                <!-- Post Footer -->
+                <footer class="post-footer fade-in">
+                    <div class="post-nav">
+                        <a href="../blog.html" class="btn btn-outline">&larr; All Posts</a>
+                    </div>
+                </footer>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/HappyCPPD" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/ashton-ang-wu-zun-846999353/" target="_blank">LinkedIn</a>
+                <a href="mailto:AshtonAng77@gmail.com">Email</a>
+            </div>
+            <p class="footer-text">Designed & Built by Ashton</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

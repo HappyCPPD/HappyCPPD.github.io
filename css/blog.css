@@ -1,0 +1,150 @@
+.blog-header {
+    padding: 4rem 0 2rem;
+    text-align: center;
+}
+
+.blog-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.blog-header p {
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.blog-section {
+    padding: 2rem 0 5rem;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.blog-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.blog-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+}
+
+.blog-card-content {
+    padding: 1.5rem;
+}
+
+.blog-card-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+}
+
+.blog-date {
+    color: var(--accent);
+    font-family: var(--font-mono);
+}
+
+.blog-category {
+    color: var(--text-secondary);
+}
+
+.blog-card h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+.blog-card h2 a {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.blog-card h2 a:hover {
+    color: var(--accent);
+}
+
+.blog-excerpt {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.blog-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.blog-read-more {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: var(--transition);
+}
+
+.blog-read-more:hover {
+    text-decoration: underline;
+}
+
+.blog-empty {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-secondary);
+}
+
+.blog-empty h2 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.blog-featured {
+    grid-column: 1 / -1;
+}
+
+.blog-featured .blog-card-content {
+    padding: 2.5rem;
+}
+
+.blog-featured h2 {
+    font-size: 1.75rem;
+}
+
+.featured-badge {
+    background: var(--accent);
+    color: var(--bg-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .blog-featured .blog-card-content {
+        padding: 1.5rem;
+    }
+}

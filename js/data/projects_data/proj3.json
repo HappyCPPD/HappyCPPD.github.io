@@ -1,9 +1,0 @@
-{
-    "id": "proj3",
-    "name": "Perlin Noise Simulator",
-    "summary": "A visual simulator showcasing Perlin noise with detailed seed information.",
-    "img": "images/Perlin.png",
-    "details": "Developed using HTML, CSS, and JavaScript, this web application visualizes Perlin noise algorithms and provides detailed analysis of the generated patterns.",
-    "category": "javascript",
-    "github_link": "https://github.com/HappyCPPD/Perlin"
-}

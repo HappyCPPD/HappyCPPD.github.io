@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projects by Ashton - Cybersecurity tools, encryption systems, and algorithmic visualizations.">
+    <title>Projects | Ashton</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/projects.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">A<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Header -->
+        <section class="projects-header">
+            <div class="container">
+                <h1 class="fade-in">My <span class="text-accent">Projects</span></h1>
+                <p class="fade-in">A collection of things I've built to learn, explore, and solve problems. Each project represents a different challenge I wanted to tackle.</p>
+            </div>
+        </section>
+
+        <!-- Projects List -->
+        <section class="projects-list">
+            <div class="container">
+                <!-- Project 1 -->
+                <article class="project-item fade-in">
+                    <div class="project-header">
+                        <div class="project-info">
+                            <h2>Automated Reconnaissance Tool</h2>
+                            <div class="project-meta">
+                                <span class="project-type">Security Tool</span>
+                            </div>
+                        </div>
+                        <span class="project-number-badge">01</span>
+                    </div>
+
+                    <div class="project-description">
+                        <h3>What it is</h3>
+                        <p>A Shell script built to automate the information-gathering phase of security testing. The tool chains together different command-line scanning tasks to output clean, actionable data.</p>
+                    </div>
+
+                    <div class="project-description">
+                        <h3>Why I built it</h3>
+                        <p>I wanted to speed up the tedious parts of footprinting. It was a great way to learn how to automate security workflows directly from the terminal.</p>
+                    </div>
+
+                    <div class="project-tech">
+                        <h4>Technologies</h4>
+                        <div class="tags">
+                            <span class="tag">Shell</span>
+                            <span class="tag">Bash</span>
+                            <span class="tag">Nmap</span>
+                            <span class="tag">Security</span>
+                        </div>
+                    </div>
+
+                    <div class="project-actions">
+                        <a href="https://github.com/HappyCPPD/Automated-Recon-Tool/tree/main" class="btn btn-outline btn-small" target="_blank">View on GitHub ↗</a>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="project-item fade-in">
+                    <div class="project-header">
+                        <div class="project-info">
+                            <h2>Encrypted Client-Server Chatroom</h2>
+                            <div class="project-meta">
+                                <span class="project-type">Network Application</span>
+                            </div>
+                        </div>
+                        <span class="project-number-badge">02</span>
+                    </div>
+
+                    <div class="project-description">
+                        <h3>What it is</h3>
+                        <p>A custom chat application built from scratch in Python that encrypts messages in transit. I set up the networking logic for the server and clients, and then integrated encryption protocols so the data stays private over the network.</p>
+                    </div>
+
+                    <div class="project-description">
+                        <h3>Why I built it</h3>
+                        <p>I wanted to see exactly how secure communication works under the hood. This project helped me understand sockets, client-server architecture, and practical encryption implementation.</p>
+                    </div>
+
+                    <div class="project-tech">
+                        <h4>Technologies</h4>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Sockets</span>
+                            <span class="tag">Encryption</span>
+                            <span class="tag">Networking</span>
+                        </div>
+                    </div>
+
+                    <div class="project-actions">
+                        <a href="https://github.com/HappyCPPD/Chatroom-with-encrypter/tree/main" class="btn btn-outline btn-small" target="_blank">Encrypted Version ↗</a>
+                        <a href="https://github.com/HappyCPPD/python-chat-room/tree/main" class="btn btn-outline btn-small" target="_blank">Base Version ↗</a>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="project-item fade-in">
+                    <div class="project-header">
+                        <div class="project-info">
+                            <h2>Space Colonization Algorithm</h2>
+                            <div class="project-meta">
+                                <span class="project-type">Visualization</span>
+                            </div>
+                        </div>
+                        <span class="project-number-badge">03</span>
+                    </div>
+
+                    <div class="project-description">
+                        <h3>What it is</h3>
+                        <p>A Python script that uses the Space Colonization algorithm to visually generate organic growth patterns. The algorithm simulates how trees grow by competing for resources in space.</p>
+                    </div>
+
+                    <div class="project-description">
+                        <h3>Why I built it</h3>
+                        <p>I enjoy pushing my problem-solving skills outside of standard security labs. This project was heavy on logic and helped me level up my understanding of complex data structures and algorithmic flow.</p>
+                    </div>
+
+                    <div class="project-tech">
+                        <h4>Technologies</h4>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Algorithms</span>
+                            <span class="tag">Data Structures</span>
+                            <span class="tag">Visualization</span>
+                        </div>
+                    </div>
+
+                    <div class="project-actions">
+                        <a href="https://happycppd.github.io/Space-Colonization-Algorithm/" class="btn btn-demo btn-small" target="_blank">Try Live Demo ↗</a>
+                        <a href="https://github.com/HappyCPPD/Space-Colonization-Algorithm" class="btn btn-outline btn-small" target="_blank">View Source ↗</a>
+                    </div>
+                </article>
+
+                <!-- Project 4 -->
+                <article class="project-item fade-in">
+                    <div class="project-header">
+                        <div class="project-info">
+                            <h2>Fractal Tree Generator</h2>
+                            <div class="project-meta">
+                                <span class="project-type">Visualization</span>
+                            </div>
+                        </div>
+                        <span class="project-number-badge">04</span>
+                    </div>
+
+                    <div class="project-description">
+                        <h3>What it is</h3>
+                        <p>A Python implementation of fractal tree generation using recursive algorithms. Creates beautiful, mathematically-generated tree structures that demonstrate the power of recursion and self-similarity in nature.</p>
+                    </div>
+
+                    <div class="project-description">
+                        <h3>Why I built it</h3>
+                        <p>Fractals have always fascinated me. The way simple rules can create complex, organic structures. Building this helped me deeply understand recursion and mathematical patterns in programming.</p>
+                    </div>
+
+                    <div class="project-tech">
+                        <h4>Technologies</h4>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Recursion</span>
+                            <span class="tag">Fractals</span>
+                            <span class="tag">Mathematics</span>
+                        </div>
+                    </div>
+
+                    <div class="project-actions">
+                        <a href="https://github.com/HappyCPPD/Fractal-Tree" class="btn btn-outline btn-small" target="_blank">View on GitHub ↗</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/HappyCPPD" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/ashton-ang-wu-zun-846999353/" target="_blank">LinkedIn</a>
+                <a href="mailto:AshtonAng77@gmail.com">Email</a>
+            </div>
+            <p class="footer-text">Designed & Built by Ashton</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/projects.js"></script>
+</body>
+</html>

@@ -1,9 +1,0 @@
-{
-    "id": "proj1",
-    "name": "Chatroom With An Encrypter",
-    "summary": "A secure chatroom that uses sockets with built-in encryption.",
-    "img": "images/Encrypt.png",
-    "details": "This project was developed in Python and leverages socket programming for real-time communication. The encryption module ensures all messages are secure and private.",
-    "category": "python",
-    "github_link": "https://github.com/HappyCPPD/Chatroom-with-encrypter"
-}
