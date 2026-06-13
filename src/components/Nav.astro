@@ -1,0 +1,154 @@
+---
+interface Props { active?: string; }
+const { active } = Astro.props;
+
+const items = [
+  { href: '/',          label: 'Home',     key: 'home' },
+  { href: '/projects/', label: 'Projects', key: 'projects' },
+  { href: '/blog/',     label: 'Blog',     key: 'blog' },
+  { href: '/contact/',  label: 'Contact',  key: 'contact' },
+];
+---
+
+<header class="nav">
+  <div class="shell nav__bar">
+    <a href="/" class="nav__mark" aria-label="Home">
+      Ashton<span>Ang</span>
+    </a>
+
+    <button
+      class="nav__toggle"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      aria-controls="nav-menu"
+    >
+      <span></span><span></span>
+    </button>
+
+    <nav id="nav-menu" class="nav__menu" aria-label="Primary">
+      <ul>
+        {items.map((it) => (
+          <li>
+            <a
+              href={it.href}
+              class="nav__link"
+              aria-current={active === it.key ? 'page' : undefined}
+            >{it.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--ink) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4.25rem;
+  }
+  .nav__mark {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+    color: var(--paper);
+    text-decoration: none;
+  }
+  .nav__mark span { color: var(--paper-faint); margin-left: 0.15rem; }
+
+  .nav__menu ul {
+    display: flex;
+    gap: 2rem;
+  }
+  .nav__link {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.06em;
+    color: var(--paper-dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color var(--dur) var(--ease);
+  }
+  .nav__link:hover { color: var(--paper); }
+  .nav__link[aria-current='page'] { color: var(--paper); }
+  .nav__link[aria-current='page']::before {
+    content: "";
+    display: inline-block;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-right: 0.55rem;
+    vertical-align: middle;
+  }
+
+  .nav__toggle { display: none; }
+
+  /* ---- Native mobile: full-width stacked sheet, not a shrunk desktop bar ---- */
+  @media (max-width: 720px) {
+    .nav__toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      width: 2.5rem; height: 2.5rem;
+      background: transparent;
+      border: 1px solid var(--line-strong);
+      border-radius: 2px;
+      cursor: pointer;
+    }
+    .nav__toggle span {
+      display: block;
+      width: 1.1rem; height: 1.5px;
+      margin-inline: auto;
+      background: var(--paper);
+      transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+    }
+    .nav__toggle[aria-expanded='true'] span:nth-child(1) { transform: translateY(3.75px) rotate(45deg); }
+    .nav__toggle[aria-expanded='true'] span:nth-child(2) { transform: translateY(-3.75px) rotate(-45deg); }
+
+    .nav__menu {
+      position: fixed;
+      inset: 4.25rem 0 auto 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--dur) var(--ease);
+    }
+    .nav__menu[data-open='true'] { max-height: 80vh; }
+    .nav__menu ul {
+      flex-direction: column;
+      gap: 0;
+      padding: 0.5rem var(--gutter) 1.5rem;
+    }
+    .nav__link {
+      display: block;
+      font-size: 1.35rem;
+      font-family: var(--font-display);
+      text-transform: none;
+      letter-spacing: -0.01em;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector('.nav__toggle');
+  const menu = document.getElementById('nav-menu');
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    menu?.setAttribute('data-open', String(!open));
+  });
+</script>

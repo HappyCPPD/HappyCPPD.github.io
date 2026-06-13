@@ -1,0 +1,86 @@
+---
+import type { Project } from '../data/projects';
+interface Props { project: Project; }
+const { project } = Astro.props;
+---
+
+<article class="row">
+  <div class="row__head">
+    <span class="eyebrow">{project.kicker}</span>
+  </div>
+
+  <div class="row__body">
+    <h3 class="row__title">{project.title}</h3>
+    <p class="row__summary">{project.summary}</p>
+    <p class="row__detail">{project.detail}</p>
+
+    <div class="row__meta">
+      <ul class="tags" aria-label="Technologies">
+        {project.tags.map((t) => <li class="tag">{t}</li>)}
+      </ul>
+      <div class="row__links">
+        {project.links.map((l) => (
+          <a
+            class="link"
+            data-arrow
+            href={l.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >{l.label}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+</article>
+
+<style>
+  .row {
+    display: grid;
+    grid-template-columns: 12rem 1fr;
+    gap: 1.5rem 2.5rem;
+    padding-block: clamp(2rem, 1.2rem + 3vw, 3.5rem);
+    border-top: 1px solid var(--line);
+  }
+  .row:last-child { border-bottom: 1px solid var(--line); }
+
+  /* Tactile hover: the content nudges over and the kicker warms to amber */
+  .row__body { transition: transform var(--dur) var(--ease); }
+  .row:hover .row__body { transform: translateX(7px); }
+  .row .eyebrow,
+  .row .eyebrow::before {
+    transition: color var(--dur) var(--ease),
+                width var(--dur) var(--ease),
+                background var(--dur) var(--ease);
+  }
+  .row:hover .eyebrow { color: var(--accent); }
+  .row:hover .eyebrow::before { width: 2.6rem; background: var(--accent); }
+
+  .row__head { padding-top: 0.4rem; }
+  .row__title { margin-bottom: 0.75rem; }
+  .row__summary {
+    color: var(--paper);
+    font-size: var(--step-1);
+    line-height: 1.4;
+    max-width: 48ch;
+    margin-bottom: 0.9rem;
+  }
+  .row__detail {
+    color: var(--paper-dim);
+    max-width: var(--measure);
+    margin-bottom: 1.5rem;
+  }
+  .row__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+  }
+  .row__links { display: flex; gap: 1.75rem; }
+
+  /* Native mobile: single column, label stacks above content */
+  @media (max-width: 720px) {
+    .row { grid-template-columns: 1fr; gap: 1rem; }
+    .row__head { padding-top: 0; }
+  }
+</style>

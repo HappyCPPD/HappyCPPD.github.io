@@ -1,0 +1,97 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+---
+
+<Base
+  title="Blog · Ashton Ang"
+  description="Notes on cybersecurity, code, and the things I'm figuring out as I go."
+  active="blog"
+>
+  <section class="head shell">
+    <span class="eyebrow" data-rise>Writing</span>
+    <h1 class="head__title" data-rise style="--delay: 60ms">Notes &amp; write-ups</h1>
+    <p class="head__intro measure" data-rise style="--delay: 120ms">
+      Thinking out loud about what I broke, what I learned, and what I'd do differently.
+    </p>
+  </section>
+
+  <section class="shell" style="padding-bottom: var(--bay)">
+    {posts.length === 0 ? (
+      <p class="empty">No posts yet. Add a markdown file in <code>src/content/blog/</code>.</p>
+    ) : (
+      <ul class="list">
+        {posts.map((post) => (
+          <li class="post">
+            <a class="post__link" href={`/blog/${post.id}/`}>
+              <time class="post__date" datetime={post.data.pubDate.toISOString()}>
+                {fmt(post.data.pubDate)}
+              </time>
+              <span class="post__title">{post.data.title}</span>
+              <span class="post__desc">{post.data.description}</span>
+              <span class="post__go" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+</Base>
+
+<style>
+  .head { padding-block: clamp(3rem, 1.5rem + 7vw, 6.5rem) 2.5rem; }
+  .head__title { font-size: var(--step-4); margin: 0.6rem 0 1.25rem; }
+  .head__intro { color: var(--paper-dim); font-size: var(--step-1); }
+  .empty { color: var(--paper-faint); }
+  .empty code { font-family: var(--font-mono); color: var(--paper-dim); }
+
+  .list { border-top: 1px solid var(--line); }
+  .post { border-bottom: 1px solid var(--line); }
+  .post__link {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr auto;
+    grid-template-areas: "date title go" "date desc go";
+    gap: 0.2rem 2rem;
+    align-items: baseline;
+    padding: clamp(1.25rem, 0.9rem + 1.5vw, 2rem) 0.25rem;
+    text-decoration: none;
+    transition: background var(--dur) var(--ease);
+  }
+  .post__link:hover { background: var(--surface); }
+  .post__date {
+    grid-area: date;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--paper-faint);
+    letter-spacing: 0.02em;
+  }
+  .post__title {
+    grid-area: title;
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    color: var(--paper);
+    line-height: 1.15;
+  }
+  .post__desc { grid-area: desc; color: var(--paper-dim); max-width: 54ch; }
+  .post__go {
+    grid-area: go;
+    font-family: var(--font-mono);
+    color: var(--paper-faint);
+    transition: transform var(--dur) var(--ease), color var(--dur) var(--ease);
+  }
+  .post__link:hover .post__go { transform: translateX(4px); color: var(--paper); }
+
+  @media (max-width: 640px) {
+    .post__link {
+      grid-template-columns: 1fr auto;
+      grid-template-areas: "date go" "title go" "desc go";
+      gap: 0.4rem 1rem;
+    }
+  }
+</style>

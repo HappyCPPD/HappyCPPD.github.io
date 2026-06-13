@@ -1,0 +1,96 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
+---
+
+<Base title={`${post.data.title} · Ashton Ang`} description={post.data.description} active="blog">
+  <article class="post shell">
+    <header class="post__head">
+      <a class="link" data-arrow href="/blog/" style="margin-bottom: 1.5rem; display: inline-block;">
+        Back to writing
+      </a>
+      <span class="eyebrow">
+        <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+      </span>
+      <h1 class="post__title">{post.data.title}</h1>
+      <p class="post__desc">{post.data.description}</p>
+    </header>
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</Base>
+
+<style>
+  .post { padding-block: clamp(3rem, 1.5rem + 7vw, 6rem) var(--bay); }
+  .post__head { margin-bottom: 3rem; }
+  .post__title {
+    font-size: var(--step-4);
+    margin: 0.6rem 0 1rem;
+    max-width: 18ch;
+  }
+  .post__desc {
+    color: var(--paper-dim);
+    font-size: var(--step-1);
+    max-width: var(--measure);
+  }
+
+  /* ---- Long-form reading column ---- */
+  .prose { max-width: var(--measure); }
+  .prose :global(h2) {
+    font-size: var(--step-2);
+    margin: 2.75rem 0 0.9rem;
+  }
+  .prose :global(h3) {
+    font-size: var(--step-1);
+    margin: 2rem 0 0.6rem;
+  }
+  .prose :global(p) { margin-bottom: 1.25rem; color: var(--paper-dim); }
+  .prose :global(strong) { color: var(--paper); font-weight: 600; }
+  .prose :global(a) { color: var(--paper); text-decoration: underline; text-underline-offset: 3px; }
+  .prose :global(ul),
+  .prose :global(ol) { margin: 0 0 1.25rem 1.25rem; color: var(--paper-dim); }
+  .prose :global(li) { margin-bottom: 0.4rem; list-style: revert; }
+  .prose :global(blockquote) {
+    border-left: 2px solid var(--accent);
+    padding-left: 1.25rem;
+    margin: 1.5rem 0;
+    color: var(--paper);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-1);
+  }
+  .prose :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--surface-2);
+    padding: 0.12em 0.4em;
+    border-radius: 2px;
+    color: var(--paper);
+  }
+  .prose :global(pre) {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 1.1rem 1.25rem;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+  }
+  .prose :global(pre code) { background: none; padding: 0; }
+  .prose :global(hr) { border: none; border-top: 1px solid var(--line); margin: 2.5rem 0; }
+</style>

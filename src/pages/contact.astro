@@ -1,0 +1,174 @@
+---
+import Base from '../layouts/Base.astro';
+
+
+const WEB3FORMS_KEY = '6ffa8943-4bbd-45ec-abc6-db8b26318e6a';
+const EMAIL = 'AshtonAng77@gmail.com';
+---
+
+<Base
+  title="Contact · Ashton Ang"
+  description="Get in touch with Ashton Ang about cybersecurity internships, projects, or collaboration."
+  active="contact"
+>
+  <section class="head shell">
+    <span class="eyebrow" data-rise>Contact</span>
+    <h1 class="head__title" data-rise style="--delay: 60ms">Let's talk</h1>
+    <p class="head__intro measure" data-rise style="--delay: 120ms">
+      Internships, project ideas, or a question about something I built.
+      The inbox is open.
+    </p>
+  </section>
+
+  <section class="shell grid" style="padding-bottom: var(--bay)">
+    <div class="channels">
+      <a class="channel" href={`mailto:${EMAIL}`}>
+        <span class="channel__k">Email</span>
+        <span class="channel__v">{EMAIL}</span>
+      </a>
+      <a class="channel" href="https://github.com/HappyCPPD" target="_blank" rel="noopener noreferrer">
+        <span class="channel__k">GitHub</span>
+        <span class="channel__v">@HappyCPPD</span>
+      </a>
+      <a class="channel" href="https://www.linkedin.com/in/ashton-ang-wu-zun-846999353/" target="_blank" rel="noopener noreferrer">
+        <span class="channel__k">LinkedIn</span>
+        <span class="channel__v">Ashton Ang Wu Zun</span>
+      </a>
+    </div>
+
+    <form class="form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
+      <input type="hidden" name="subject" value="New message from your portfolio" />
+      <input type="hidden" name="from_name" value="Portfolio contact form" />
+      <div class="hp" aria-hidden="true">
+        <label>Leave this empty<input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" /></label>
+      </div>
+
+      <div class="field">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" required autocomplete="name" />
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required autocomplete="email" />
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn--solid" id="submit">Send message</button>
+      <p class="form__note" id="note" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</Base>
+
+<style>
+  .head { padding-block: clamp(3rem, 1.5rem + 7vw, 6.5rem) 2.5rem; }
+  .head__title { font-size: var(--step-4); margin: 0.6rem 0 1.25rem; }
+  .head__intro { color: var(--paper-dim); font-size: var(--step-1); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 3rem 4rem;
+    align-items: start;
+  }
+
+  .channels { display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .channel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    transition: padding-left var(--dur) var(--ease);
+  }
+  .channel:hover { padding-left: 0.5rem; }
+  .channel__k {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper-faint);
+  }
+  .channel__v { color: var(--paper); font-size: var(--step-1); }
+
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .field { display: grid; gap: 0.45rem; margin-bottom: 1.25rem; }
+  .field label {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--paper-faint);
+  }
+  .field input,
+  .field textarea {
+    font: inherit;
+    color: var(--paper);
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: 2px;
+    padding: 0.7rem 0.85rem;
+    transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+  }
+  .field input:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--paper);
+    background: var(--surface-2);
+  }
+  .field textarea { resize: vertical; min-height: 7rem; }
+
+  .form__note { margin-top: 1rem; font-family: var(--font-mono); font-size: var(--step--1); }
+  .form__note[data-state="error"] { color: #e7a6a6; }
+  .form__note[data-state="ok"] { color: var(--paper); }
+
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const note = document.getElementById('note');
+  const btn = document.getElementById('submit') as HTMLButtonElement | null;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form || !note || !btn) return;
+
+    // Honeypot tripped -> silently drop.
+    if ((form.elements.namedItem('botcheck') as HTMLInputElement)?.checked) return;
+
+    note.textContent = '';
+    note.removeAttribute('data-state');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      const data = await res.json().catch(() => ({ success: res.ok }));
+      if (res.ok && data.success) {
+        form.reset();
+        note.textContent = 'Thanks, message sent. I’ll reply soon.';
+        note.setAttribute('data-state', 'ok');
+        btn.textContent = 'Sent';
+      } else {
+        throw new Error(data.message || 'bad response');
+      }
+    } catch {
+      note.textContent = 'Something went wrong. Email me directly instead.';
+      note.setAttribute('data-state', 'error');
+      btn.disabled = false;
+      btn.textContent = 'Send message';
+    }
+  });
+</script>

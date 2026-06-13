@@ -1,0 +1,67 @@
+---
+const year = new Date().getFullYear();
+const links = [
+  { href: 'https://github.com/HappyCPPD', label: 'GitHub' },
+  { href: 'https://www.linkedin.com/in/ashton-ang-wu-zun-846999353/', label: 'LinkedIn' },
+  { href: 'mailto:AshtonAng77@gmail.com', label: 'Email' },
+];
+---
+
+<footer class="foot">
+  <div class="shell foot__grid">
+    <div>
+      <p class="foot__name">Ashton Ang Wu Zun</p>
+      <p class="foot__line">Cybersecurity student · building, breaking, writing it down.</p>
+    </div>
+    <ul class="foot__links">
+      {links.map((l) => (
+        <li>
+          <a
+            class="link"
+            href={l.href}
+            {...(l.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          >{l.label}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+  <div class="shell foot__base">
+    <span>© {year} Ashton Ang</span>
+    <span class="foot__colophon">Built with Astro · Fraunces &amp; Geist</span>
+  </div>
+</footer>
+
+<style>
+  .foot {
+    background: var(--hush);
+    border-top: 1px solid var(--line);
+    padding-block: var(--bay) 2rem;
+    margin-top: var(--bay);
+  }
+  .foot__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 3rem;
+    justify-content: space-between;
+    align-items: start;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .foot__name {
+    font-family: var(--font-display);
+    color: var(--paper);
+    font-size: var(--step-1);
+  }
+  .foot__line { color: var(--paper-faint); max-width: 38ch; }
+  .foot__links { display: flex; gap: 1.5rem; }
+  .foot__base {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--paper-faint);
+  }
+</style>

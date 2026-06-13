@@ -1,0 +1,158 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectRow from '../components/ProjectRow.astro';
+import HeroCanvas from '../components/HeroCanvas.astro';
+import { projects } from '../data/projects';
+
+const featured = projects.filter((p) => p.featured);
+---
+
+<Base
+  title="Ashton Ang · Cybersecurity Student"
+  description="Cybersecurity student at the Institute of Technical Education in Singapore. Building security tools, breaking things to learn how they work, and writing it down."
+  active="home"
+>
+  <HeroCanvas />
+
+  <section class="hero shell">
+    <div class="hero__inner">
+      <span class="eyebrow" data-rise style="--delay: 0ms">Cybersecurity · Singapore</span>
+      <h1 class="hero__name" data-rise style="--delay: 60ms">
+        Ashton Ang<span class="hero__stop">.</span>
+      </h1>
+      <p class="hero__thesis" data-rise style="--delay: 120ms">
+        I build small security tools, <em>take systems apart</em> to understand
+        them, and keep notes I can defend without hand-waving.
+      </p>
+      <div class="hero__cta" data-rise style="--delay: 180ms">
+        <a class="btn btn--solid" href="/projects/">See the work</a>
+        <a class="btn btn--ghost" href="/resume.pdf" target="_blank" rel="noopener">Résumé ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bay shell about">
+    <span class="eyebrow">About</span>
+    <div class="about__grid">
+      <p class="about__lead">
+        I'm a cybersecurity student at the Institute of Technical Education in
+        Singapore, and I learn by building. A log analyzer here, a subnet scanner
+        there. I care more about understanding the thing than collecting tools I
+        cannot explain.
+      </p>
+      <dl class="about__facts">
+        <div>
+          <dt>Focus</dt>
+          <dd>Network security, log analysis, automation</dd>
+        </div>
+        <div>
+          <dt>Working in</dt>
+          <dd>Python · Shell · JavaScript · SQL</dd>
+        </div>
+        <div>
+          <dt>Credentials</dt>
+          <dd>Fortinet FCF · Google Cybersecurity · Microsoft</dd>
+        </div>
+        <div>
+          <dt>Looking for</dt>
+          <dd>A cybersecurity internship</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="bay shell">
+    <div class="section-head">
+      <span class="eyebrow">Selected work</span>
+      <a class="link" data-arrow href="/projects/">All projects</a>
+    </div>
+    <div class="rows">
+      {featured.map((p) => <ProjectRow project={p} />)}
+    </div>
+  </section>
+
+  <section class="bay shell cta">
+    <h2 class="cta__title">Building something, hiring, or just curious?</h2>
+    <a class="btn btn--solid" href="/contact/">Get in touch</a>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(3.5rem, 2rem + 9vw, 9rem) var(--bay);
+  }
+  .hero__inner { position: relative; z-index: 1; }
+  .hero__name {
+    font-size: var(--step-4);
+    font-weight: 500;
+    margin: 0.6rem 0 1.5rem;
+    letter-spacing: -0.02em;
+  }
+  .hero__stop { color: var(--accent); }
+  .hero__thesis {
+    font-size: var(--step-2);
+    font-family: var(--font-display);
+    font-weight: 360;
+    line-height: 1.3;
+    color: var(--paper);
+    max-width: 22ch;
+  }
+  .hero__thesis em {
+    font-style: italic;
+    color: var(--paper);
+  }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 2.25rem; }
+
+  .about__grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2.5rem 4rem;
+    margin-top: 1.5rem;
+    align-items: start;
+  }
+  .about__lead {
+    font-size: var(--step-1);
+    color: var(--paper);
+    line-height: 1.5;
+    max-width: var(--measure);
+  }
+  .about__facts { display: grid; gap: 1.25rem; }
+  .about__facts dt {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper-faint);
+    margin-bottom: 0.2rem;
+  }
+  .about__facts dd { color: var(--paper-dim); }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    border-top: 1px solid var(--line);
+    padding-top: var(--bay);
+  }
+  .cta__title {
+    font-size: var(--step-3);
+    font-weight: 440;
+    max-width: 20ch;
+  }
+
+  @media (max-width: 720px) {
+    .about__grid { grid-template-columns: 1fr; }
+  }
+</style>

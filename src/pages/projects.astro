@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectRow from '../components/ProjectRow.astro';
+import { projects } from '../data/projects';
+---
+
+<Base
+  title="Projects · Ashton Ang"
+  description="Security tools, network applications, and algorithmic experiments built by Ashton Ang."
+  active="projects"
+>
+  <section class="head shell">
+    <span class="eyebrow" data-rise>Work</span>
+    <h1 class="head__title" data-rise style="--delay: 60ms">Things I've built</h1>
+    <p class="head__intro measure" data-rise style="--delay: 120ms">
+      A working list. Each one taught me something specific, and the notes under
+      every project say what.
+    </p>
+  </section>
+
+  <section class="shell" style="padding-bottom: var(--bay)">
+    <div class="rows">
+      {projects.map((p) => <ProjectRow project={p} />)}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head { padding-block: clamp(3rem, 1.5rem + 7vw, 6.5rem) 2.5rem; }
+  .head__title { font-size: var(--step-4); margin: 0.6rem 0 1.25rem; }
+  .head__intro { color: var(--paper-dim); font-size: var(--step-1); }
+</style>
