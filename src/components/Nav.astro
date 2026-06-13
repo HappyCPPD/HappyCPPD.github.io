@@ -143,12 +143,6 @@ const items = [
   }
 </style>
 
-<script>
-  const toggle = document.querySelector('.nav__toggle');
-  const menu = document.getElementById('nav-menu');
-  toggle?.addEventListener('click', () => {
-    const open = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!open));
-    menu?.setAttribute('data-open', String(!open));
-  });
-</script>
+<!-- Logic lives in /public/nav-menu.js (external, same-origin) so it passes
+     the strict `script-src 'self'` CSP. -->
+<script is:inline src="/nav-menu.js" defer></script>

@@ -132,43 +132,6 @@ const EMAIL = 'AshtonAng77@gmail.com';
   }
 </style>
 
-<script>
-  const form = document.getElementById('contact-form') as HTMLFormElement | null;
-  const note = document.getElementById('note');
-  const btn = document.getElementById('submit') as HTMLButtonElement | null;
-
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (!form || !note || !btn) return;
-
-    // Honeypot tripped -> silently drop.
-    if ((form.elements.namedItem('botcheck') as HTMLInputElement)?.checked) return;
-
-    note.textContent = '';
-    note.removeAttribute('data-state');
-    btn.disabled = true;
-    btn.textContent = 'Sending…';
-
-    try {
-      const res = await fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { Accept: 'application/json' },
-      });
-      const data = await res.json().catch(() => ({ success: res.ok }));
-      if (res.ok && data.success) {
-        form.reset();
-        note.textContent = 'Thanks, message sent. I’ll reply soon.';
-        note.setAttribute('data-state', 'ok');
-        btn.textContent = 'Sent';
-      } else {
-        throw new Error(data.message || 'bad response');
-      }
-    } catch {
-      note.textContent = 'Something went wrong. Email me directly instead.';
-      note.setAttribute('data-state', 'error');
-      btn.disabled = false;
-      btn.textContent = 'Send message';
-    }
-  });
-</script>
+<!-- Logic lives in /public/contact-form.js (external, same-origin) so it passes
+     the strict `script-src 'self'` CSP. -->
+<script is:inline src="/contact-form.js" defer></script>
