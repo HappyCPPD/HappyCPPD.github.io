@@ -1,0 +1,20 @@
+PLACEHOLDER — replace this whole file with your real PGP public key block.
+
+Generate the key on your own machine (never let the private key touch a server
+or a repo). Then export ONLY the public key into this file.
+
+  # 1. Create a key (Ed25519, no expiry prompt walks you through name/email)
+  gpg --full-generate-key
+
+  # 2. Find the key id / fingerprint
+  gpg --list-secret-keys --keyid-format=long AshtonAng77@gmail.com
+  gpg --fingerprint AshtonAng77@gmail.com
+
+  # 3. Export the PUBLIC key (ASCII-armored) over this file
+  gpg --armor --export AshtonAng77@gmail.com > public/pgp-key.txt
+
+Finally, paste the fingerprint into PGP_FINGERPRINT in src/pages/contact.astro
+so the PGP row appears, then rebuild and redeploy.
+
+The real file should begin with:
+-----BEGIN PGP PUBLIC KEY BLOCK-----

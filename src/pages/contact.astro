@@ -4,6 +4,11 @@ import Base from '../layouts/Base.astro';
 
 const WEB3FORMS_KEY = '6ffa8943-4bbd-45ec-abc6-db8b26318e6a';
 const EMAIL = 'AshtonAng77@gmail.com';
+
+// PGP: paste your key's full fingerprint here once you've published the public
+// key to /public/pgp-key.txt. While this is empty, the PGP row stays hidden, so
+// the site never ships a broken link to a key that does not exist yet.
+const PGP_FINGERPRINT = ''; // e.g. '9F1C 2B3A 44D5 6E78 90AB  CDEF 1234 5678 9ABC DEF0'
 ---
 
 <Base
@@ -34,6 +39,12 @@ const EMAIL = 'AshtonAng77@gmail.com';
         <span class="channel__k">LinkedIn</span>
         <span class="channel__v">Ashton Ang Wu Zun</span>
       </a>
+      {PGP_FINGERPRINT && (
+        <a class="channel" href="/pgp-key.txt">
+          <span class="channel__k">PGP</span>
+          <span class="channel__v">{PGP_FINGERPRINT}</span>
+        </a>
+      )}
     </div>
 
     <form class="form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
