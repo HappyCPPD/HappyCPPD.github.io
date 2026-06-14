@@ -19,15 +19,17 @@ const { project } = Astro.props;
         {project.tags.map((t) => <li class="tag">{t}</li>)}
       </ul>
       <div class="row__links">
-        {project.links.map((l) => (
-          <a
-            class="link"
-            data-arrow
-            href={l.href}
-            target="_blank"
-            rel="noopener noreferrer"
-          >{l.label}</a>
-        ))}
+        {project.links.map((l) => {
+          const external = /^https?:\/\//.test(l.href);
+          return (
+            <a
+              class="link"
+              data-arrow
+              href={l.href}
+              {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >{l.label}</a>
+          );
+        })}
       </div>
     </div>
   </div>

