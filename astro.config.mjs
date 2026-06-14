@@ -1,10 +1,11 @@
 import { defineConfig } from 'astro/config';
 
 // Set this to your live URL (used for canonical + OG links).
-// Start with your Cloudflare Pages URL, e.g. 'https://ashton-portfolio.pages.dev',
-// then switch to your custom domain once it's connected.
+// This MUST match the deployment you actually share with people, or canonical
+// tags and OG previews will point at the wrong place. Update it here if you
+// later connect a custom domain.
 export default defineConfig({
-  site: 'https://ashton-portfolio.pages.dev',
+  site: 'https://happycppd-github-io.pages.dev',
   build: {
     // Clean directory-style URLs: /projects/ instead of /projects.html
     format: 'directory',

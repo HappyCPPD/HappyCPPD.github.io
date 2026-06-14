@@ -27,7 +27,15 @@ I split the work into four small functions so each piece was easy to follow:
 - `print_report` formats the sorted table and the summary
 - `main` reads the command line argument and handles the missing file and permission cases
 
-The regular expression is `Failed password.*?from (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})`. It matches a standard sshd failure line and captures the address after `from`.
+My first regex was `Failed password.*?from (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})`. It worked on real logs, but it has a quiet bug: `\d{1,3}` happily matches `999.999.999.999`, which is not a valid address. For a tool whose whole job is to be trusted about *which* IP attacked you, "close enough" is not good enough.
+
+So I tightened each octet to the 0–255 range:
+
+```
+Failed password.*?from ((?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})
+```
+
+It is uglier, but it now rejects malformed addresses instead of silently counting them. The lesson stuck: a parser that accepts garbage will eventually report garbage, and in security that garbage ends up in a block list or an incident ticket.
 
 ## What I actually learned
 
