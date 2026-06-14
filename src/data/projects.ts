@@ -10,6 +10,16 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: 'Hack The Box: Oopsie',
+    kicker: 'Offensive security',
+    summary: 'My first full Hack The Box machine, taken from a guest cookie to a shell on the box.',
+    detail:
+      'I chained four small web flaws into a foothold: an IDOR that leaked the admin account ID, a role cookie I could edit in the browser to become that admin, and an upload form with no checks that let me run a PHP reverse shell. From there I found a reused database password and switched to a real user account. It was my first time using Burp Suite and reverse shells, and I spent a solid hour pointing the netcat listener at the wrong machine before the idea of a callback connection finally clicked. The write-up explains the whole thing from scratch, including that mistake.',
+    tags: ['Hack The Box', 'Web exploitation', 'Burp Suite', 'Reverse shell', 'Linux'],
+    links: [{ label: 'Read the write-up', href: '/blog/oopsie-hackthebox/' }],
+    featured: true,
+  },
+  {
     title: 'SSH Failed Login Analyzer',
     kicker: 'Security tooling',
     summary: 'A Python tool that reads a Linux auth log and reports which IP addresses keep failing to log in over SSH.',
