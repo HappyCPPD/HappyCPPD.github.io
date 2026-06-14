@@ -172,6 +172,6 @@ I ran out of free lab time right at the last step, so I didn't finish the root p
 
 Not one of these bugs is clever on its own. Each one is just a place where the app believed something it should have verified: an ID in a URL, a role in a cookie, a file in an upload, a password in a file. On their own they look minor. The real lesson, and the thing I keep thinking about, is that danger stacks. The ID leak alone exposes an email. Add a cookie that sets your own role and it becomes admin. Hand that admin an upload form and it becomes a shell. Small plus small plus small ended with me owning the box.
 
-And the hour I lost on the reverse shell taught me more than any step that worked first try. I now understand what "reverse" means because I spent an hour pointing everything the wrong way.
+And the hour I lost on the reverse shell taught me more than any step that worked first try. I now understand what "reverse" means because I spent thirty minutes pointing everything the wrong way.
 
-*Authorised practice on the Hack The Box platform. Flag values left out on purpose.*
+c*Authorised practice on the Hack The Box platform. Flag values left out on purpose.*
