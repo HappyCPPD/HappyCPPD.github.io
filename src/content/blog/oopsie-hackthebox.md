@@ -4,9 +4,9 @@ description: "A complete beginner's walk through the Oopsie box, explained the w
 pubDate: 2026-06-14
 ---
 
-This was the first full Hack The Box machine I finished, and I went in knowing close to nothing except the basics from the level 0 challenges. I leaned on a guide when I got stuck, retyped and searched things I didn't understand, and broke the same step a few times before it worked. 
+This was the first full Hack The Box machine I finished, and I went in knowing close to nothing beyond the level 0 basics. I leaned on a guide when I got stuck, retyped and searched things I didn't understand, and broke the same step a few times before it worked.
 
-So this whole box actually was a website that just trusted whatever resource it got and didn't try to validate it with anything from the server.
+So this whole box  was a website that just trusted whatever resource it got and didn't check it against the server.
 
 ## Step 1: see what's running
 
@@ -31,15 +31,15 @@ First, I tried the ssh port, trying to use generic, or misconfigured passwords t
 
 ## Step 2: find the hidden login
 
-The site is a car company called MegaCorp Automotive. The visible pages are useless, so I ran the traffic through Burp Suite, which is a proxy that records every request the browser makes. I decided to find a login as in the website, it required me to login but I could not find the login redirect on the page so, reading that list, instead of the page, showed a file the site loads but never links to: a login script under `/cdn-cgi/login/`.
+The site wanted me to log in, but I couldn't find a login link anywhere on the page. So I checked Burp's request list instead of the page itself. It showed a file the site loads but never links to: a login page script at `/cdn-cgi/login/`.
 
-That path led to a login page with a **Login as Guest** button. I first tried simple passwords and usernames like `admin, administrator, root` however none worked. Guest was the only way in, so I took it. It dropped me into a "Repair Management System" with a basic, low-permission view.
+That path led to a login page with a Login as Guest button. I tried obvious credentials first: `admin`, `administrator`, `root`. None worked. Guest was the only way in, so I took it. It dropped me into a "Repair Management System" with a basic, low-permission view.
 
 ![the login page with a Login as Guest option](/blog/oopsie/02-login-guest.png)
 
 ## Step 3: ask for things you're not supposed to see
 
-I went to click on the Account tab and saw the link and wondered if I could possibly change that if the id actually meant something. 
+I clicked the Account tab and noticed the ID sitting in the link. I wondered what would happen if I changed it.
 
 ```text
 /cdn-cgi/login/admin.php?content=accounts&id=1
@@ -84,7 +84,7 @@ After a refresh, the admin menu showed up, including access to the upload page. 
 
 This is where I lost about half an hour, so it's worth slowing down.
 
- I spent a lot of time searching about that specific Apache server version looking if there was any known vulnerabilities about that version but I was met with no avail until I found out that the admin upload form accepted any file with no checks. A web server like Apache will run a PHP file you give it, so I uploaded a PHP **reverse shell**: a small script that, when run, calls back to my machine and gives me a command line on the target. I got this file from the guide itself.
+I spent a long time searching that exact Apache version for known vulnerabilities and came up empty. Then I noticed the real opening: the admin upload form accepted any file, with no checks. Apache will run a PHP file you give it, so I uploaded a `PHP reverse shell`: a small script that calls back to my machine and hands me a command line on the target. I took the script from the guide.
 
 A reverse shell is the target connecting *back to me*. That word "reverse" is the entire point. Normally my computer connects to the server. Here I make the server connect to my computer and hand me a shell. So two things have to point at **my** machine, not the target:
 
@@ -116,7 +116,7 @@ Port 80 failed twice: once because ports under 1024 need root (`Permission denie
 ![netcat refusing port 80 with permission and in-use errors, then listening fine on port 1234](/blog/oopsie/05-netcat.png)
 *The errors that finally made it click: don't fight over port 80, pick a free high port.*
 
-For reference, the netcat flags are simple: `-l` listen, `-v` verbose so it tells you what's happening, `-n` skip DNS lookups, `-p` set the port.
+For reference, the netcat flags are short: -l listen, -v verbose so it tells you what's happening, -n skip DNS lookups, -p set the port.
 
 So the working setup was: put **my** IP and port `1234` in the script, start the listener on that same `1234`, then visit the uploaded file in the browser to run it.
 
@@ -132,7 +132,7 @@ $port = 1234;            // a free port I'm listening on
 ```text
 connect to [10.10.15.244] from 10.129.85.163
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
-```
+``` 
 
 I was on the machine as `www-data`, the low-privilege user the web server runs as.
 
@@ -174,4 +174,4 @@ Not one of these bugs is clever on its own. Each one is just a place where the a
 
 And the hour I lost on the reverse shell taught me more than any step that worked first try. I now understand what "reverse" means because I spent thirty minutes pointing everything the wrong way.
 
-c*Authorised practice on the Hack The Box platform. Flag values left out on purpose.*
+*I am not allowed to send the flag though.*
