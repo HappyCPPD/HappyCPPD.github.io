@@ -8,14 +8,14 @@ This was my first real socket project. The idea is simple: run a server on one m
 
 ## How it works
 
-One machine runs the server. Each client opens the script, points at the server's local IP, and connects. From there, messages typed on one client show up for the others in real time. It only works on a LAN, which kept the scope small enough to actually finish.
+So one machine would run the server while clients could connect to the server's local ip to chat in real time.
 
 ## What tripped me up
 
-Getting two machines to talk was harder than the code itself. Finding the right local IP, making sure the port was open, and handling a client that disconnects without warning were all small lessons that do not show up when everything runs on one laptop.
+Getting machines to talk to each other was a lot harder than I thought, having to research how to find the right local ip, port, and handling what happens when a client disconnects without any reason. 
 
 ## Why it mattered
 
-Sockets felt abstract until I had two terminals on two machines sending text back and forth. After this I understood the client to server model in a way that reading about it never gave me.
+Sockets felt alien to me until I had researched it and now I feel a lot more confident on how they work and how to utilize them.
 
 [Source on GitHub](https://github.com/HappyCPPD/python-chat-room)
