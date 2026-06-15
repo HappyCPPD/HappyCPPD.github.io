@@ -133,7 +133,15 @@ if (canvas && ctx && host) {
   }
 
   let t = 0;
-  window.addEventListener('resize', () => { clearTimeout(t); t = window.setTimeout(run, 200); });
+  let lastW = window.innerWidth;
+  window.addEventListener('resize', () => {
+    // Mobile browsers fire resize when the URL bar shows/hides on scroll,
+    // changing only the height. Ignore those — re-run only on width change.
+    if (window.innerWidth === lastW) return;
+    lastW = window.innerWidth;
+    clearTimeout(t);
+    t = window.setTimeout(run, 200);
+  });
   run();
 
   // Subtle cursor parallax

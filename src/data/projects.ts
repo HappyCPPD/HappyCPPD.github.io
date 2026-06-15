@@ -30,7 +30,6 @@ export const projects: Project[] = [
       { label: 'Read the write-up', href: '/blog/ssh-failed-login-analyzer/' },
       { label: 'Source', href: 'https://github.com/HappyCPPD/AuthLogReader' },
     ],
-    featured: true,
   },
   {
     title: 'Subnet Scanner',
@@ -56,6 +55,5 @@ export const projects: Project[] = [
       { label: 'Read the write-up', href: '/blog/lan-chat-room/' },
       { label: 'Source', href: 'https://github.com/HappyCPPD/python-chat-room' },
     ],
-    featured: true,
   },
 ];
