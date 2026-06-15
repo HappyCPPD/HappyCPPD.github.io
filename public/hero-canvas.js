@@ -1,10 +1,4 @@
-// Generative signature: a space-colonization tree (the organic look Ashton
-// liked). The trunk is rooted at the very bottom of the page and procedurally
-// branches upward across the full scroll, into the hero. A spatial grid keeps
-// the nearest-node search cheap so it can climb fast. Honors reduced-motion.
-//
-// Served as a static file from /public so it loads as an external, same-origin
-// script (satisfies the site's strict `script-src 'self'` CSP).
+// space-colonization tree backdrop; honors reduced-motion
 
 const canvas = document.getElementById('hero-canvas');
 const ctx = canvas && canvas.getContext('2d');
@@ -31,7 +25,7 @@ if (canvas && ctx && host) {
     if (bucket) bucket.push(i); else grid.set(k, [i]);
   }
 
-  // Nearest node to an attractor, searching only the 3x3 neighbouring cells.
+  // nearest node within the 3x3 neighbouring cells
   function nearest(ax, ay) {
     const cx = Math.floor(ax / CELL), cy = Math.floor(ay / CELL);
     let best = -1, bd = MAX_DIST;
@@ -64,23 +58,21 @@ if (canvas && ctx && host) {
     attractors = [];
     const baseX = W * 0.66;
     const vh = Math.min(H, window.innerHeight || 800);
-    const canopyH = Math.min(H, vh * 0.98); // the hero region, where it blooms
+    const canopyH = Math.min(H, vh * 0.98); // hero region
     warmY = canopyH * 0.45;
 
-    // Dense canopy cloud in the hero region (top), biased to the right.
+    // canopy cloud, top, right-biased
     const canopyCount = Math.min(560, Math.max(170, Math.floor((W * canopyH) / 4600)));
     for (let i = 0; i < canopyCount; i++) {
       attractors.push({ x: W * (0.44 + 0.60 * Math.random()), y: canopyH * Math.random(), dead: false });
     }
-    // Thin attractor "column" from the canopy down to the page bottom, so a
-    // single trunk climbs the whole page before branching. Spacing < MAX_DIST
-    // keeps the climb continuous.
+    // attractor column down to page bottom so one trunk climbs first
     for (let y = canopyH * 0.7; y < H + 40; y += 80) {
       attractors.push({ x: baseX + (Math.random() - 0.5) * 44, y, dead: false });
     }
 
     maxNodes = Math.min(12000, Math.floor(H / SEG) * 4 + canopyCount * 12);
-    // Single root at the very bottom of the page; the trunk grows upward.
+    // root at page bottom
     addNode({ x: baseX, y: H + 10, px: baseX, py: H + 40 });
   }
 
@@ -104,7 +96,7 @@ if (canvas && ctx && host) {
       const n = nodes[i];
       const nx = n.x + (v.x / len) * SEG;
       const ny = n.y + (v.y / len) * SEG;
-      const warm = ny < warmY; // canopy tips in the hero pick up a warm glow
+      const warm = ny < warmY; // warm canopy tips
       ctx.strokeStyle = warm ? 'rgba(224,164,88,0.16)' : 'rgba(244,240,232,0.11)';
       ctx.beginPath();
       ctx.moveTo(n.px, n.py);
@@ -119,7 +111,7 @@ if (canvas && ctx && host) {
 
   function animate() {
     let alive = true;
-    for (let s = 0; s < 5 && alive; s++) alive = grow(); // several steps/frame = fast climb
+    for (let s = 0; s < 5 && alive; s++) alive = grow(); // steps per frame
     if (alive) raf = requestAnimationFrame(animate);
   }
 
@@ -135,8 +127,7 @@ if (canvas && ctx && host) {
   let t = 0;
   let lastW = window.innerWidth;
   window.addEventListener('resize', () => {
-    // Mobile browsers fire resize when the URL bar shows/hides on scroll,
-    // changing only the height. Ignore those — re-run only on width change.
+    // ignore height-only resize (mobile URL bar)
     if (window.innerWidth === lastW) return;
     lastW = window.innerWidth;
     clearTimeout(t);
@@ -144,7 +135,7 @@ if (canvas && ctx && host) {
   });
   run();
 
-  // Subtle cursor parallax
+  // cursor parallax
   if (!reduce) {
     host.addEventListener('pointermove', (e) => {
       const r = host.getBoundingClientRect();

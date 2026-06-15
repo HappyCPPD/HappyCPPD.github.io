@@ -5,10 +5,8 @@ import Base from '../layouts/Base.astro';
 const WEB3FORMS_KEY = '6ffa8943-4bbd-45ec-abc6-db8b26318e6a';
 const EMAIL = 'AshtonAng77@gmail.com';
 
-// PGP: paste your key's full fingerprint here once you've published the public
-// key to /public/pgp-key.txt. While this is empty, the PGP row stays hidden, so
-// the site never ships a broken link to a key that does not exist yet.
-const PGP_FINGERPRINT = ''; // e.g. '9F1C 2B3A 44D5 6E78 90AB  CDEF 1234 5678 9ABC DEF0'
+// empty until pgp-key.txt published; row hidden while empty
+const PGP_FINGERPRINT = '';
 ---
 
 <Base
@@ -143,6 +141,4 @@ const PGP_FINGERPRINT = ''; // e.g. '9F1C 2B3A 44D5 6E78 90AB  CDEF 1234 5678 9A
   }
 </style>
 
-<!-- Logic lives in /public/contact-form.js (external, same-origin) so it passes
-     the strict `script-src 'self'` CSP. -->
 <script is:inline src="/contact-form.js" defer></script>

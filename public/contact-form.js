@@ -1,7 +1,3 @@
-// Contact form: progressive enhancement over a normal POST to Web3Forms.
-// Served from /public as an external, same-origin script so it satisfies the
-// site's strict `script-src 'self'` CSP.
-
 const form = document.getElementById('contact-form');
 const note = document.getElementById('note');
 const btn = document.getElementById('submit');
@@ -11,7 +7,7 @@ if (form) {
     e.preventDefault();
     if (!form || !note || !btn) return;
 
-    // Honeypot tripped -> silently drop.
+    // honeypot -> drop
     const bot = form.elements.namedItem('botcheck');
     if (bot && bot.checked) return;
 

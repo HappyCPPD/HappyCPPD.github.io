@@ -1,35 +1,31 @@
-/* =============================================================
-   Ashton portfolio design system
-   Direction: refined dark, near-monochrome + paper, no color accent.
-   Type carries the whole hierarchy. Motion whispers (<200ms).
-   ============================================================= */
+/* design system */
 
-/* ---- Design tokens ---- */
+/* ---- design tokens ---- */
 :root {
-  /* Warm near-black ground + raised surfaces */
+  /* near-black ground + raised surfaces */
   --ink:        #0d0c0a;
   --surface:    #15130d;
   --surface-2:  #1c1912;
   --hush:       #0a0907;  /* footer / deepest */
 
-  /* Paper: warm off-whites carry all the "color" */
-  --paper:      #f4f0e8;  /* primary text + headings */
-  --paper-dim:  #c2bbac;  /* secondary text (AA on --ink) */
-  --paper-faint:#8f897a;  /* captions, mono labels, large/secondary only */
+  /* off-whites carry all the "color" */
+  --paper:      #f4f0e8;  /* primary text */
+  --paper-dim:  #c2bbac;  /* secondary (AA on --ink) */
+  --paper-faint:#8f897a;  /* captions, mono labels */
 
-  /* Hairlines */
+  /* hairlines */
   --line:        rgba(244, 240, 232, 0.12);
   --line-strong: rgba(244, 240, 232, 0.26);
 
-  /* Warm accent: used sparingly (link underlines, active nav dot, hero stop) */
+  /* accent, used sparingly */
   --accent:      #e0a458;
 
-  /* Type */
+  /* type */
   --font-display: 'Fraunces Variable', 'Fraunces', Georgia, 'Times New Roman', serif;
   --font-body:    'Geist Variable', 'Geist', system-ui, sans-serif;
   --font-mono:    'Geist Mono Variable', 'Geist Mono', ui-monospace, 'SFMono-Regular', monospace;
 
-  /* Fluid type scale */
+  /* fluid type scale */
   --step--1: clamp(0.83rem, 0.80rem + 0.15vw, 0.92rem);
   --step-0:  clamp(1.00rem, 0.96rem + 0.20vw, 1.13rem);
   --step-1:  clamp(1.20rem, 1.10rem + 0.50vw, 1.50rem);
@@ -37,18 +33,18 @@
   --step-3:  clamp(2.10rem, 1.70rem + 2.00vw, 3.40rem);
   --step-4:  clamp(2.90rem, 2.10rem + 4.00vw, 5.60rem);
 
-  /* Rhythm */
+  /* rhythm */
   --measure: 64ch;
   --gutter: clamp(1.25rem, 0.8rem + 2.2vw, 2.5rem);
-  --bay: clamp(4rem, 2.5rem + 7vw, 8.5rem); /* vertical section spacing */
+  --bay: clamp(4rem, 2.5rem + 7vw, 8.5rem); /* section spacing */
   --shell: 76rem;
 
-  /* Motion: whisper */
+  /* motion */
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --dur: 160ms;
 }
 
-/* ---- Reset ---- */
+/* ---- reset ---- */
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
@@ -75,7 +71,7 @@ a { color: inherit; }
 ul { list-style: none; padding: 0; }
 button { font: inherit; color: inherit; }
 
-/* ---- Headings: Fraunces, optical, tight ---- */
+/* ---- headings ---- */
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   color: var(--paper);
@@ -88,10 +84,10 @@ h1 { font-size: var(--step-4); }
 h2 { font-size: var(--step-3); }
 h3 { font-size: var(--step-2); }
 
-/* ---- Layout primitives ---- */
+/* ---- layout primitives ---- */
 main {
-  position: relative;     /* anchors the full-page generative backdrop */
-  overflow-x: clip;        /* contains the hero canvas parallax: no stray horizontal scrollbar */
+  position: relative;     /* backdrop anchor */
+  overflow-x: clip;        /* contain canvas parallax */
 }
 
 .shell {
@@ -101,7 +97,7 @@ main {
 .bay { padding-block: var(--bay); }
 .measure { max-width: var(--measure); }
 
-/* Eyebrow: mono label that encodes section meaning, not decoration */
+/* eyebrow: mono label */
 .eyebrow {
   font-family: var(--font-mono);
   font-size: var(--step--1);
@@ -120,7 +116,7 @@ main {
   background: var(--line-strong);
 }
 
-/* ---- Links: quiet, underline draws on hover ---- */
+/* ---- links ---- */
 .link {
   color: var(--paper);
   text-decoration: none;
@@ -150,7 +146,7 @@ main {
 }
 .link[data-arrow]:hover::before { transform: translateX(3px); }
 
-/* ---- Buttons ---- */
+/* ---- buttons ---- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -180,7 +176,7 @@ main {
 }
 .btn--ghost:hover { border-color: var(--paper); transform: translateY(-1px); }
 
-/* ---- Mono meta tag list ---- */
+/* ---- mono tag list ---- */
 .tags { display: flex; flex-wrap: wrap; gap: 0.4rem 0.5rem; }
 .tag {
   font-family: var(--font-mono);
@@ -192,7 +188,7 @@ main {
   letter-spacing: 0.02em;
 }
 
-/* ---- Accessibility floor ---- */
+/* ---- accessibility ---- */
 :focus-visible {
   outline: 2px solid var(--paper);
   outline-offset: 3px;
@@ -211,7 +207,7 @@ main {
 }
 .skip-link:focus { top: 0.5rem; }
 
-/* ---- Page-load signature: hairline + headline settle (one orchestrated moment) ---- */
+/* ---- page-load rise ---- */
 @keyframes rise {
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -222,7 +218,7 @@ main {
   animation-delay: var(--delay, 0ms);
 }
 
-/* ---- Reduced motion: strip every animation/transition ---- */
+/* ---- reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
@@ -234,10 +230,10 @@ main {
   [data-rise] { opacity: 1; transform: none; }
 }
 
-/* ---- Selection ---- */
+/* ---- selection ---- */
 ::selection { background: var(--accent); color: var(--ink); }
 
-/* ---- Scrollbars: thin, themed, unobtrusive ---- */
+/* ---- scrollbars ---- */
 html {
   scrollbar-width: thin;                          /* Firefox */
   scrollbar-color: var(--line-strong) transparent;
@@ -252,7 +248,7 @@ html {
 ::-webkit-scrollbar-thumb:hover { background: var(--paper-faint); }
 ::-webkit-scrollbar-corner { background: transparent; }
 
-/* ---- Film grain: warms the flat ground, non-interactive ---- */
+/* ---- film grain ---- */
 body::after {
   content: "";
   position: fixed;

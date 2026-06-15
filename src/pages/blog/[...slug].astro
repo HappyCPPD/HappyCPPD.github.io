@@ -50,7 +50,7 @@ const fmt = (d: Date) =>
     max-width: var(--measure);
   }
 
-  /* ---- Long-form reading column ---- */
+  /* ---- prose column ---- */
   .prose { max-width: var(--measure); }
   .prose :global(h2) {
     font-size: var(--step-2);
@@ -101,7 +101,7 @@ const fmt = (d: Date) =>
     border-radius: 4px;
     margin: 1.75rem 0 0.5rem;
   }
-  /* A lone italic line right after an image reads as its caption */
+  /* italic-only line = caption */
   .prose :global(p > em:only-child) {
     display: block;
     font-size: var(--step--1);

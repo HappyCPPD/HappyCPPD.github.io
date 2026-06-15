@@ -93,7 +93,7 @@ const items = [
 
   .nav__toggle { display: none; }
 
-  /* ---- Native mobile: full-width stacked sheet, not a shrunk desktop bar ---- */
+  /* ---- mobile: stacked sheet ---- */
   @media (max-width: 720px) {
     .nav__toggle {
       display: flex;
@@ -143,6 +143,4 @@ const items = [
   }
 </style>
 
-<!-- Logic lives in /public/nav-menu.js (external, same-origin) so it passes
-     the strict `script-src 'self'` CSP. -->
 <script is:inline src="/nav-menu.js" defer></script>

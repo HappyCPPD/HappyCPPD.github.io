@@ -45,7 +45,7 @@ const { project } = Astro.props;
   }
   .row:last-child { border-bottom: 1px solid var(--line); }
 
-  /* Tactile hover: the content nudges over and the kicker warms to amber */
+  /* hover: nudge + amber kicker */
   .row__body { transition: transform var(--dur) var(--ease); }
   .row:hover .row__body { transform: translateX(7px); }
   .row .eyebrow,
@@ -80,7 +80,7 @@ const { project } = Astro.props;
   }
   .row__links { display: flex; gap: 1.75rem; }
 
-  /* Native mobile: single column, label stacks above content */
+  /* mobile: single column */
   @media (max-width: 720px) {
     .row { grid-template-columns: 1fr; gap: 1rem; }
     .row__head { padding-top: 0; }

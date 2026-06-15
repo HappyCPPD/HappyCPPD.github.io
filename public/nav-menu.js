@@ -1,6 +1,3 @@
-// Mobile nav toggle. Served from /public as an external, same-origin script
-// so it satisfies the site's strict `script-src 'self'` CSP.
-
 const toggle = document.querySelector('.nav__toggle');
 const menu = document.getElementById('nav-menu');
 if (toggle) {

@@ -1,8 +1,8 @@
 export interface Project {
   title: string;
-  kicker: string;        // short discipline label (mono eyebrow)
-  summary: string;       // one strong sentence
-  detail: string;        // what you actually did / learned
+  kicker: string;
+  summary: string;
+  detail: string;
   tags: string[];
   links: { label: string; href: string }[];
   featured?: boolean;

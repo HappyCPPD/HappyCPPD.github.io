@@ -1,13 +1,10 @@
 ---
-// Generative signature: a space-colonization tree (the organic look Ashton
-// liked). The trunk is rooted at the very bottom of the page and procedurally
-// branches upward across the full scroll, into the hero. A spatial grid keeps
-// the nearest-node search cheap so it can climb fast. Honors reduced-motion.
+// space-colonization tree backdrop
 ---
 <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
 
 <style>
-  /* Full-page backdrop: spans all of <main>, rooted at the bottom, behind content. */
+  /* full-page backdrop */
   .hero-canvas {
     position: absolute;
     top: 0;
@@ -24,7 +21,4 @@
   }
 </style>
 
-<!-- Logic lives in /public/hero-canvas.js so it loads as an external,
-     same-origin script and satisfies the strict `script-src 'self'` CSP.
-     `is:inline` keeps Astro from re-bundling it back into the page. -->
 <script is:inline src="/hero-canvas.js" defer></script>
