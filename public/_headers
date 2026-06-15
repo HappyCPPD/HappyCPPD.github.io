@@ -1,7 +1,3 @@
-# Cloudflare Pages security headers. Files in public/ are copied to the site
-# root at build time, so this lands at /_headers where Cloudflare reads it.
-# Verify after deploy with: curl -I https://yourdomain  (or securityheaders.com)
-
 /*
   Content-Security-Policy: default-src 'self'; base-uri 'none'; object-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com; frame-ancestors 'none'; upgrade-insecure-requests
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload

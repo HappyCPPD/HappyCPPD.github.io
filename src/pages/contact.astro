@@ -4,9 +4,6 @@ import Base from '../layouts/Base.astro';
 
 const WEB3FORMS_KEY = '6ffa8943-4bbd-45ec-abc6-db8b26318e6a';
 const EMAIL = 'AshtonAng77@gmail.com';
-
-// empty until pgp-key.txt published; row hidden while empty
-const PGP_FINGERPRINT = '';
 ---
 
 <Base
@@ -37,12 +34,6 @@ const PGP_FINGERPRINT = '';
         <span class="channel__k">LinkedIn</span>
         <span class="channel__v">Ashton Ang Wu Zun</span>
       </a>
-      {PGP_FINGERPRINT && (
-        <a class="channel" href="/pgp-key.txt">
-          <span class="channel__k">PGP</span>
-          <span class="channel__v">{PGP_FINGERPRINT}</span>
-        </a>
-      )}
     </div>
 
     <form class="form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">

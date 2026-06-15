@@ -1,6 +1,5 @@
-# RFC 9116 security contact. https://securitytxt.org
+# RFC 9116 security contact — https://securitytxt.org
 Contact: mailto:AshtonAng77@gmail.com
-Encryption: https://happycppd-github-io.ashtonang77.workers.dev/pgp-key.txt
-Expires: 2027-06-14T00:00:00.000Z
-Preferred-Languages: en
 Canonical: https://happycppd-github-io.ashtonang77.workers.dev/.well-known/security.txt
+Preferred-Languages: en
+Expires: 2027-06-16T00:00:00.000Z
