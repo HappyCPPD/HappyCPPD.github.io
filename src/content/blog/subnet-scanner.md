@@ -29,7 +29,9 @@ Live IP Address     Open Ports
 
 I initially thought that there was no difference between being able to ping and being able to get a successful handshake, however doing research led me to know that a ping just tells you the machine is alive while the receiving a handshake proves that the service is listening. 
 
-I also learnt that network calls spend almost all their time waiting so doing it one at a time is very slow. I researched that I had to put the work on a thread pool which causes it to speed up.
+I also learnt that network calls spend almost all their time waiting, not actually computing. So doing them one at a time is slow in a way that adds up fast: a /24 is 254 addresses, and if each one waits a full second, that's a whole four minutes wasted.
+
+That waiting is the whole reason a thread pool helps. While one host is stuck waiting on its reply, the others don't have to sit in line behind it, they can be waiting at the same time. I used a fixed-size pool instead of just firing off one thread per address, because 254 threads at once is a good way to run the machine out of file handles. Capping it kept that under control and still brought my scans down from minutes to a few seconds.
 
 ## Limits and ethics
 
