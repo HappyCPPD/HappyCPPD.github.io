@@ -14,7 +14,7 @@ export const projects: Project[] = [
     kicker: 'Offensive security',
     summary: 'My first full Hack The Box machine, taken from a guest cookie to a shell on the box.',
     detail:
-      'I chained four small web flaws into a foothold: an IDOR that leaked the admin account ID, a role cookie I could edit in the browser to become that admin, and an upload form with no checks that let me run a PHP reverse shell. From there I found a reused database password and switched to a real user account. It was my first time using Burp Suite and reverse shells, and I spent a solid hour pointing the netcat listener at the wrong machine before the idea of a callback connection finally clicked. The write-up explains the whole thing from scratch, including that mistake.',
+      'I chained four simple web vulnerabilities together to gain access into a system. An IDOR flaw that got me the administrator\u0027s account ID, editing browser cookies to trick the site, uploading and executing a reserve shell PHP script, and found a reused database password.',
     tags: ['Hack The Box', 'Web exploitation', 'Burp Suite', 'Reverse shell', 'Linux'],
     links: [{ label: 'Read the write-up', href: '/blog/oopsie-hackthebox/' }],
     featured: true,
